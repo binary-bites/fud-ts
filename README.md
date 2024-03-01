@@ -1,3 +1,19 @@
+# Running the server:
+
+Run without opening:
+
+```sh
+npm run dev
+```
+
+Run and open:
+
+``` sh
+npm run dev -- --open
+```
+
+Swap npm for bun if you prefer.
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
