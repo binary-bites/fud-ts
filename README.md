@@ -1,5 +1,18 @@
 # Running the server:
+## Backend
+Make sure nodemon is installed globally:
 
+``` sh
+npm i -g nodemon
+```
+
+then cd into backend/ and run:
+
+``` sh
+nodemon server.js
+```
+
+## Frontend
 Run without opening:
 
 ```sh
