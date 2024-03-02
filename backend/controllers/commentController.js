@@ -7,9 +7,9 @@ import checkInput from '../utils/utils.js'
 
 export const createComment = async (req, res) => {
     try {
-        const { content, user, post } = req.body
+        const { content, user, postID } = req.body
         checkInput(['content', 'user', 'post'], req.body);
-        const comment = new Comment({ content, user, post })
+        const comment = new Comment({ content, user, postID })
         await comment.save()
         const userActivity = await UserActivity.findOne({ user })
         userActivity.comments.push(comment._id)

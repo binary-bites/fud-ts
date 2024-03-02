@@ -41,35 +41,20 @@ const signUpUserFirebase = async (req, res) => {
 }
 
 const loginUserFirebase = async (req, res) => { // should create an access token and a refresh token to cookies and send to the front end
-    const {firebaseToken} = req.body
+    const {firebaseID} = req.body
   
     try {
-      if (!firebaseToken) {
-        return res.status(401).json({error: 'Request is not authorized'})
-      }
-      let firebaseID = null;
-      await getAuth()
-          .verifyIdToken(firebaseToken)
-          .then((decodedToken) => {
-          firebaseID = decodedToken.uid;
-          })
-          .catch((error) => {
-              return res.status(401).json({error: 'Request is not authorized'})
-          });
-      
       if (!firebaseID) {
         return res.status(401).json({error: 'Request is not authorized'})
       }
   
-      console.log('firebaseID', firebaseID)
-  
-      const user = await findOne({firebaseID})
+      const user = await User.findOne({firebaseID})
       //console.log(user)
       if(!user || user.deleted === true){
         throw new Error('User has been deleted')
       }
       
-      const profile = await _findOne({user: user._id})
+      const profile = await Profile.findOne({user: user._id})
 
       res.status(200).json(profile)
     } catch (error) {
