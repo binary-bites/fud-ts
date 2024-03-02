@@ -2,6 +2,8 @@ import React, { useRef, useState } from "react"
 import { Form, Button, Card, Alert } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContext"
 import { Link, useNavigate } from "react-router-dom"
+import customFetch from "../customFetch"
+
 
 export default function Login() {
   const emailRef = useRef()
@@ -17,9 +19,25 @@ export default function Login() {
     try {
       setError("")
       setLoading(true)
-      await login(emailRef.current.value, passwordRef.current.value)
-      navigate("/")
-    } catch {
+      const userCredential = await login(emailRef.current.value, passwordRef.current.value)
+      const firebaseUser = userCredential.user
+      const token = firebaseUser.uid
+      console.log("token", token)
+      const body = {
+        "firebaseID": token
+      }
+      const result = await customFetch("http://localhost:4000/api/user/login", "POST", body, "")
+      if (result.ok) {
+        const responseBody = await result.json()
+        console.log(responseBody)
+        navigate("/")
+      } else {
+        const responseBody = await result.json()
+        console.log("error body", responseBody)
+        throw new Error(responseBody.error)
+      }
+      //navigate("/")
+    } catch (error) {
       setError("Failed to log in")
     }
 
