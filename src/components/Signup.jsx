@@ -3,7 +3,6 @@ import { Form, Button, Card, Alert } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContext"
 import { Link, useNavigate } from "react-router-dom"
 import customFetch from "../customFetch"
-import axios from "axios";
 
 export default function Signup() {
   const emailRef = useRef()
@@ -17,27 +16,6 @@ export default function Signup() {
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
-
-
-  const fetchWithAuth = async (url, method, body) => {
-
-
-    try {
-      const response = await axios({
-        url: url,
-        method: method,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        data: body,
-      });
-
-      return response.data;
-    } catch (error) {
-      console.error("Error in fetchWithAuth:", error);
-      throw error;
-    }
-  };
 
   async function handleSubmit(e) {
     e.preventDefault()
@@ -68,8 +46,12 @@ export default function Signup() {
         "email": emailRef.current.value
       };
     
-      const response = await fetchWithAuth("http://localhost:4000/api/user/check", "POST", body);
-      console.log("RESPONSE", response)
+      const result = await customFetch("http://localhost:4000/api/user/check", "POST", body, "");
+      console.log("RESPONSE", result)
+      if (!result.ok) {
+        throw new Error("Failed to check availability of username and email")
+      }
+      const response = await result.json()
 
       if (response.usernameExists) {
         return setError("Username already taken.")
@@ -80,7 +62,7 @@ export default function Signup() {
       
     } catch (error) {
       console.error(error);
-      return setError("Failed to check availability: " + error.message);
+      return setError(error.message);
     }
 
     try {
@@ -97,8 +79,17 @@ export default function Signup() {
         "dateOfBirth": dateOfBirthRef.current.value
       }
 
-      await customFetch("http://localhost:4000/api/user/signup", "POST", body, "")
-      navigate("/")
+      const result = await customFetch("http://localhost:4000/api/user/signup", "POST", body, "")
+      console.log(result)
+      if (result.ok) {
+        const responseBody = await result.json()
+        console.log(responseBody)
+        navigate("/")
+      } else {
+        const responseBody = await result.json()
+        console.log("error body", responseBody)
+        throw new Error(responseBody.error)
+      }
     } catch (error) {
       console.log(error)
       setError(error.message)

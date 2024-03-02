@@ -1,33 +1,26 @@
-import axios from 'axios';
-
-
 // Return a function from the hook that can be used to perform the fetch operation.
-export default async function customFetch (url, method, body, token)  {
-  // if (!currentUser) {
-  //   throw new Error("No user is currently signed in.");
-  // }
+export default async function customFetch(url, method, body, token) {
+  // Define headers
+  const headers = new Headers({
+    'Authorization': `Bearer ${token}`,
+    'Content-Type': 'application/json',
+  });
 
-  // const token = await currentUser.getIdToken(true); // Force token refresh
-  // console.log("Token:", token);
+  let response = null;
   try {
-    const response = await axios({
-      url: url,
+    // Perform the fetch operation
+    const fetchResponse = await fetch(url, {
       method: method,
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json',
-      },
-      data: body,
+      headers: headers,
+      body: JSON.stringify(body),
     });
 
-    return response.data;
+    return fetchResponse;
   } catch (error) {
-    console.error("Error in fetchWithAuth:", error);
-    throw error;
+    console.error("Error in customFetch:", error);
+    return {
+      data: response, // In case of error, response might be null or contain error information if it was parsed
+      error: error, // Contains the error object
+    };
   }
-};
-
-
-
-
-
+}

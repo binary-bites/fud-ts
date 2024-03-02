@@ -20,8 +20,8 @@ export default function Dashboard() {
     }
   }
 
-  // Example function using Axios to make a GET request
-  const handleAxiosRequest = async () => {
+
+  const handleTestRequest = async () => {
     const url = "http://localhost:4000/api/post/create";
     const method = "POST"
     const body = {
@@ -32,7 +32,11 @@ export default function Dashboard() {
     try {
       const token = await currentUser.getIdToken(true); // Force token refresh
       const result = await customFetch(url, method, body, token);
-      console.log(result);
+      if (!result.ok) {
+        throw new Error("Failed to create post")
+      }
+      const response = await result.json();
+      console.log(response);
     } catch (error) {
       console.log(error);
     }
@@ -47,8 +51,7 @@ export default function Dashboard() {
           <h2 className="text-center mb-4">Profile</h2>
           {error && <Alert variant="danger">{error}</Alert>}
           <strong>Email:</strong> {currentUser.email}
-          {/* Add a button for Axios request */}
-          <Button className="mt-3" variant="primary" onClick={handleAxiosRequest}>Axios Request</Button>
+          <Button className="mt-3" variant="primary" onClick={handleTestRequest}>Post Request</Button>
 
         </Card.Body>
       </Card>
