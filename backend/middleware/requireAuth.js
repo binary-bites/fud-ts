@@ -2,9 +2,17 @@ import User from '../models/userModel.js';
 import { getAuth } from 'firebase-admin/auth';
 
 const requireAuth = async (req, res, next) => {
+    if(req.body.adminPassword || req.query.adminPassword) {
+        if((req.body.adminPassword === process.env.ADMIN_PASSWORD || req.query.adminPassword === process.env.ADMIN_PASSWORD) && (req.body.user || req.query.user)) {
+            if(!req.body.user) {
+                req.body.user = req.query.user;
+            }
+            next();
+            return;
+        }
+    }
     if (!req.headers.authorization || !req.headers.authorization.startsWith('Bearer ')) {
-        res.status(403).send('Unauthorized');
-        return;
+        return res.status(403).send('Unauthorized');
       }
     
       const token = req.headers.authorization.split('Bearer ')[1];
