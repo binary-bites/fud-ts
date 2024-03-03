@@ -28,7 +28,7 @@ export const createPost = async (req, res) => {
         res.status(401).json({ error: error.message })
     }
 }
-
+//hi
 export const deletePost = async (req, res) => {
     try {
         const { postID, user } = req.body;
