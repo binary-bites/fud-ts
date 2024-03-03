@@ -4,7 +4,7 @@ import { createPost, deletePost, likePost, dislikePost, editPost, getPost } from
 import requireAuth from '../middleware/requireAuth.js'
 
 const router = Router()
-//router.use(requireAuth)
+router.use(requireAuth)
 
 router.post('/create', createPost)
 router.delete('/delete', deletePost)
