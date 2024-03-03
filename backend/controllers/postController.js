@@ -23,7 +23,7 @@ export const createPost = async (req, res) => {
         const userActivity = await UserActivity.findOne({ user })
         userActivity.posts.push(post._id)
         await userActivity.save()
-        res.status(200).json({ post })
+        res.status(200).json( post )
     } catch (error) {
         res.status(401).json({ error: error.message })
     }
@@ -31,13 +31,13 @@ export const createPost = async (req, res) => {
 
 export const getPost = async (req, res) => {
     try {
-        const { postID } = req.body
-        checkInput(['postID'], req.body)
+        const { postID } = req.query
+        checkInput(['postID'], req.query)
         const post = await Post.findOne({ _id: postID })
         if (!post || post.deleted) {
             throw Error('Post does not exist')
         }
-        res.status(200).json({ post })
+        res.status(200).json( post )
     } catch (error) {
         res.status(401).json({ error: error.message })
     }
@@ -92,7 +92,7 @@ export const deletePost = async (req, res) => {
 
         await post.save();
 
-        res.status(200).json({ post });
+        res.status(200).json( post );
     } catch (error) {
         res.status(401).json({ error: error.message });
     }
@@ -122,7 +122,7 @@ export const likePost = async (req, res) => {
         }
         await post.save()
         await userActivity.save()
-        res.status(200).json({ post })
+        res.status(200).json( post )
     } catch (error) {
         res.status(401).json({ error: error.message })
     }
@@ -153,7 +153,7 @@ export const dislikePost = async (req, res) => {
         }
         await post.save()
         await userActivity.save()
-        res.status(200).json({ post })
+        res.status(200).json( post )
     }
     catch (error) {
         res.status(401).json({ error: error.message })
@@ -174,7 +174,7 @@ export const editPost = async (req, res) => {
         if(title) post.title = title;
         if(content) post.content = content;
         await post.save();
-        res.status(200).json({ post });
+        res.status(200).json( post );
     } catch (error) {
         res.status(401).json({ error: error.message });
     }

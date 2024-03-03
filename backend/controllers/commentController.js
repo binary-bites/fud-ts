@@ -14,7 +14,7 @@ export const createComment = async (req, res) => {
         const userActivity = await UserActivity.findOne({ user })
         userActivity.comments.push(comment._id)
         await userActivity.save()
-        res.status(200).json({ comment })
+        res.status(200).json( comment )
     } catch (error) {
         res.status(401).json({ error: error.message })
     }
@@ -87,7 +87,7 @@ export const likeComment = async (req, res) => {
             comment.likes.push(user);
         }
         await comment.save();
-        res.status(200).json({ comment });
+        res.status(200).json( comment );
     } catch (error) {
         res.status(401).json({ error: error.message })
     }
@@ -112,7 +112,7 @@ export const dislikeComment = async (req, res) => {
             comment.dislikes.push(user);
         }
         await comment.save();
-        res.status(200).json({ comment });
+        res.status(200).json( comment );
     } catch (error) {
         res.status(401).json({ error: error.message })
     }
