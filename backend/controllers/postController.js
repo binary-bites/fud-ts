@@ -28,7 +28,21 @@ export const createPost = async (req, res) => {
         res.status(401).json({ error: error.message })
     }
 }
-//hi
+
+export const getPost = async (req, res) => {
+    try {
+        const { postID } = req.body
+        checkInput(['postID'], req.body)
+        const post = await Post.findOne({ _id: postID })
+        if (!post || post.deleted) {
+            throw Error('Post does not exist')
+        }
+        res.status(200).json({ post })
+    } catch (error) {
+        res.status(401).json({ error: error.message })
+    }
+}
+
 export const deletePost = async (req, res) => {
     try {
         const { postID, user } = req.body;
