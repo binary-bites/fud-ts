@@ -1,10 +1,8 @@
 import { IPost } from '../../backend/models/postModel.ts'
 import { IUser } from '../../backend/models/userModel.ts'
 import PostCardContainer from './PostCardContainer.tsx'
-import customFetch from '../customFetch.js'
-
-/* const posts = await customFetch("http://localhost:4000/api/userActivity/getPosts", "GET", )
-* console.log(posts) */
+import { useAuth } from "../contexts/AuthContext.jsx";
+import { customFetch, customGet } from '../customFetch.js'
 
 const mockUser: IUser = {
     username: "jeff",
@@ -43,9 +41,29 @@ const mockPost2: IPost = {
 const postArray: IPost[] = [mockPost, mockPost2]
 
 
-
 export default function ExplorePage() {
+    const { currentUser } = useAuth();
+
+    const loadPosts = async () => {
+        const url = "http://localhost:4000/api/userActivity/getPosts";
+        try {
+            const token = await currentUser.getIdToken(true); // Force token refresh
+            const result = await customGet(url, token);
+            if (!result.ok) {
+                throw new Error("Failed to get posts")
+            }
+            const response = await result.json();
+            console.log(response);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const posts = loadPosts();
+    console.log(posts);
+
+
     return (
-        <PostCardContainer posts={postArray}/>
+        <PostCardContainer posts={postArray} />
     )
 }
