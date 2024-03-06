@@ -1,4 +1,4 @@
-import User from '../models/userModel.js';
+import User from '../models/userModel.ts';
 import { getAuth } from 'firebase-admin/auth';
 
 const requireAuth = async (req, res, next) => {

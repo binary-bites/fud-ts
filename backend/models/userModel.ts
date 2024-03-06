@@ -1,5 +1,14 @@
-import { Schema as _Schema, model } from 'mongoose'
-const Schema = _Schema
+import { Schema, model } from 'mongoose'
+
+export interface IUser {
+  username: string;
+  dateOfBirth: Date | null;
+  firstName: string;
+  lastName: string;
+  email: string | null;
+  deleted: boolean;
+  firebaseID: string | null;
+}
 
 const userSchema = new Schema({
     username: {
