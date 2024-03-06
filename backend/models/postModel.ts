@@ -1,8 +1,23 @@
-import mongoose from 'mongoose';
-const Schema = mongoose.Schema
+import {Schema, model, Types} from 'mongoose';
 
+// modified to support ts from: https://mongoosejs.com/docs/typescript.html
+interface IPost {
+    title: string;
+    content: string;
+    date: Date;
+    deleted: boolean;
+    user: Types.ObjectId;
+    likes: Array<Types.ObjectId>;
+    dislikes: Array<Types.ObjectId>;
+    comments: Array<Types.ObjectId>;
+    ratings: {
+        ratingType: string;
+        stars: number;
+    }[];
+    images: Array<string>;
+}
 
-const postSchema = new Schema({
+const postSchema = new Schema<IPost>({
     title: {
       type: String,
       required: true,
@@ -26,4 +41,5 @@ const postSchema = new Schema({
     images: [{ type: String, default: [] }],
 });
 
-export default mongoose.model('Post', postSchema)
+const Post = model<IPost>('Post', postSchema)
+export default Post

@@ -30,7 +30,7 @@ export default function Login() {
       if (result.ok) {
         const responseBody = await result.json()
         console.log(responseBody)
-        navigate("/")
+        navigate("/dashboard")
       } else {
         const responseBody = await result.json()
         console.log("error body", responseBody)
