@@ -1,20 +1,20 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ExplorePage from "./components/ExplorePage";
+import Navbar from "./components/Navbar";
 import Signup from "./components/Signup";
 import Dashboard from "./components/Dashboard";
 import Login from "./components/Login";
 import PrivateRoute from "./components/PrivateRoute";
 import ForgotPassword from "./components/ForgotPassword";
-import { Container } from "react-bootstrap";
 import { AuthProvider } from "./contexts/AuthContext";
 
 function App() {
   return (
-    <Container className="d-flex align-items-center justify-content-center" style={{ minHeight: "100vh" }}>
-      <div className="w-100" style={{ maxWidth: "400px" }}>
+      <>
         <Router>
           <AuthProvider>
+          <Navbar/>
           <Routes>
             <Route path="/" element={<ExplorePage/>}/>
             <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
@@ -24,8 +24,7 @@ function App() {
           </Routes>
           </AuthProvider>
         </Router>
-      </div>
-    </Container>
+      </>
   );
 }
 
