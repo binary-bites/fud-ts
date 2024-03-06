@@ -61,7 +61,7 @@ interface PostGridProps {
 
 const PostGrid: React.FC<PostGridProps> = ({ posts }) => {
     return (
-        <div className="m-5 grid grid-cols-4">
+        <div className="m-4 flex flex-wrap justify-center gap-4">
             {posts.map((post, index) => (
                 <PostCard post={post} key={index}/>
             ))}
