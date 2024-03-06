@@ -1,8 +1,8 @@
-import User from '../models/userModel.js'
+import User from '../models/userModel.ts'
 import Profile from '../models/profileModel.js'
 import UserActivity from '../models/userActivityModel.js'
-import Comment from '../models/commentModel.js'
-import Post from '../models/postModel.js'
+import Comment from '../models/commentModel.ts'
+import Post from '../models/postModel.ts'
 import  checkInput  from '../utils/utils.js'
 
 export const getPosts = async (req, res) => {
