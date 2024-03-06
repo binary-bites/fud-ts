@@ -15,7 +15,7 @@ export const editProfile = async (req, res) => {
         }
         if(bio) profile.bio = bio;
         await profile.save();
-        res.status(200).json({ profile });
+        res.status(200).json( profile );
     } catch (error) {
         res.status(401).json({ error: error.message });
     }

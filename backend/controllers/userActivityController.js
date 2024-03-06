@@ -8,7 +8,7 @@ import  checkInput  from '../utils/utils.js'
 export const getPosts = async (req, res) => {
     try {
         const posts = await Post.find({ deleted: false }).populate('user').sort({ createdAt: -1 })
-        res.status(200).json({ posts })
+        res.status(200).json( posts )
     } catch (error) {
         res.status(401).json({ error: error.message })
     }
