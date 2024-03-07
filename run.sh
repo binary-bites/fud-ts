@@ -8,7 +8,7 @@ if [[ $(command -v bun) ]]; then
     bun run dev -- --open
 else
     cd ../server
-    npm run dev -- --open &
+    npx nodemon server.js &
     cd ../fud-ts
-    npx nodemon server.js
+    npm run dev -- --open
 fi
