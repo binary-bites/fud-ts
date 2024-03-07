@@ -1,4 +1,4 @@
-import { IPost } from '../../backend/models/postModel.ts'
+import { IPost } from '../interfaces/postModel'
 
 interface PostCardProps {
     post: IPost;

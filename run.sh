@@ -2,15 +2,13 @@
 
 # if bun installed, use that
 if [[ $(command -v bun) ]]; then
-    cd backend
-    bunx tsx watch server.ts &
-
-    cd ..
+    cd ../server
+    bunx nodemon server.js &
+    cd ../fud-ts
     bun run dev -- --open
 else
-    cd backend
-    npx tsx watch server.ts &
-
-    cd ..
-    npx run dev -- --open
+    cd ../server
+    npm run dev -- --open &
+    cd ../fud-ts
+    npx nodemon server.js
 fi
