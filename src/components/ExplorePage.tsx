@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import PostCardContainer from './PostCardContainer.tsx';
 import { useAuth } from "../contexts/AuthContext.jsx";
-import { customFetch, customGet } from '../customFetch.js'
+import { customGet } from '../customFetch.js'
 import { IPost } from '../interfaces'
 
 export default function ExplorePage() {
