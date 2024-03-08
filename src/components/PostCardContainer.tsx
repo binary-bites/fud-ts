@@ -1,4 +1,4 @@
-import { IPost } from '../interfaces'
+import { IPost } from '../interfaces/postModel'
 
 interface PostCardProps {
     post: IPost;
