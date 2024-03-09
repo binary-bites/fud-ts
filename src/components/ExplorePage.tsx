@@ -3,11 +3,18 @@ import PostCardContainer from './PostCardContainer.tsx';
 import { useAuth } from "../contexts/AuthContext.jsx";
 import { customGet } from '../customFetch.js'
 import { IPost } from '../interfaces'
+import PostDetails from './PostDetails.tsx';
 
 export default function ExplorePage() {
     const { currentUser } = useAuth();
     // Use useState to hold the posts fetched from the API
     const [posts, setPosts] = useState<IPost[]>([]);
+    const [selectedPost, setSelectedPost] = useState<IPost | null>(null);
+
+    const handlePostClick = (post: IPost) => {
+        console.log
+        setSelectedPost(post);
+    };
 
     useEffect(() => {
         const loadPosts = async () => {
@@ -30,7 +37,10 @@ export default function ExplorePage() {
     }, [currentUser]); // Re-run the effect if currentUser changes
 
     return (
-        <PostCardContainer posts={posts} />
-    )
+        <>
+            <PostCardContainer posts={posts} onClick={handlePostClick} />
+            {selectedPost && <PostDetails post={selectedPost} onClose={() => setSelectedPost(null)} />}
+        </>
+    );
 }
 
