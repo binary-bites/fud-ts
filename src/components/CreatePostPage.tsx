@@ -1,6 +1,7 @@
 import { ChangeEvent, useState } from 'react';
 import { useAuth } from "../contexts/AuthContext";
 import  customFetch from '../utils/customFetch.js'
+import { useNavigate } from "react-router-dom";
 import { IImage } from '../interfaces';
 import { Endpoints } from '../utils/Endpoints';
 
@@ -17,6 +18,7 @@ interface RatingsState {
 
 export default function CreatePostPage() {
     const { currentUser } = useAuth();
+    const navigate = useNavigate();
     const [images, setImages] = useState<File[]>([]);
     const [title, setTitle] = useState<string>('');
     const [description, setDescription] = useState<string>('')
@@ -70,6 +72,7 @@ export default function CreatePostPage() {
             }
             const response = await result.json();
             console.log(response);
+            navigate("/")
         } catch (error) {
             console.log(error);
         }
