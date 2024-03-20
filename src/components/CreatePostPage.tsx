@@ -76,13 +76,13 @@ export default function CreatePostPage() {
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                     />
-                    <div className="rating">
+                    {/* <div className="rating">
                         <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" />
                         <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" />
                         <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" />
                         <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" />
                         <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" checked />
-                    </div>
+                    </div> */}
                     <button
                         onClick={handleCreatePost}
                         className="btn btn-primary w-full rounded-lg shadow"
