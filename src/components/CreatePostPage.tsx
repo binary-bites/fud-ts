@@ -4,11 +4,30 @@ import  customFetch from '../utils/customFetch.js'
 import { IImage } from '../interfaces';
 import { Endpoints } from '../utils/Endpoints';
 
+interface StarRatingProps {
+    category: keyof RatingsState;
+}
+
+interface RatingsState {
+    ambience: number;
+    price: number;
+    flavor: number;
+    difficulty: number;
+}
+
 export default function CreatePostPage() {
     const { currentUser } = useAuth();
     const [images, setImages] = useState<File[]>([]);
     const [title, setTitle] = useState<string>('');
     const [description, setDescription] = useState<string>('')
+    const [postType, setPostType] = useState<string>('Homemade');
+    const [showAdditionalRatings, setShowAdditionalRatings] = useState(false);
+    const [ratings, setRatings] = useState<RatingsState>({
+        ambience: 5, 
+        price: 5,
+        flavor: 5,
+        difficulty: 5,
+    });
 
     const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files) {
@@ -20,9 +39,25 @@ export default function CreatePostPage() {
     const handleCreatePost = async () => {
         const method = "POST"
         let formData = new FormData();
+        let ratingsData: { ratingType: string; stars: number; }[] = [];
+        if (showAdditionalRatings) {
+            if (postType === "Homemade") {
+                ratingsData.push({ratingType: "difficulty", stars: ratings.difficulty});
+                ratingsData.push({ratingType: "price", stars: ratings.price});
+                ratingsData.push({ratingType: "flavor", stars: ratings.flavor});
+            } else {
+                ratingsData.push({ratingType: "ambience", stars: ratings.ambience});
+                ratingsData.push({ratingType: "price", stars: ratings.price});
+                ratingsData.push({ratingType: "flavor", stars: ratings.flavor});
+            }
+        }
+
+        // Stringify the ratingsData array
+        const ratingsString = JSON.stringify(ratingsData);
+        // Append the stringified ratings to formData
+        formData.append('ratings', ratingsString);
         formData.append('title', title);
         formData.append('content', description);
-        
         images.forEach((file, index) => {
             formData.append(`image${index}`, file); // Append each file object
         });
@@ -39,6 +74,34 @@ export default function CreatePostPage() {
             console.log(error);
         }
     };
+
+
+    const StarRating: React.FC<StarRatingProps> = ({ category }) => {
+        const updateRating = (value: number) => {
+            setRatings((prevRatings: RatingsState) => ({ ...prevRatings, [category]: value }));
+        };
+    
+        return (
+            <div className="flex flex-row my-2">
+                <span className="mb-1 mr-10">{category.charAt(0).toUpperCase() + category.slice(1)}</span>
+                <div className="rating">
+                    {[...Array(5)].map((_, index) => (
+                        <input 
+                            key={index}
+                            type="radio" 
+                            name={`rating-${category}`} 
+                            className="mask mask-star-2 bg-orange-400" 
+                            checked={ratings[category] === index + 1}
+                            onChange={() => updateRating(index + 1)}
+                        />
+                    ))}
+                </div>
+            </div>
+        );
+    };
+    
+
+    
 
     return (
         <div className="flex justify-center items-start gap-4 mt-4">
@@ -61,6 +124,16 @@ export default function CreatePostPage() {
                             </div>
                         ))}
                     </div>
+                    <div className="form-control">
+                    <label className="label cursor-pointer">
+                        <input type="radio" name="radio-2" className="radio radio-primary" checked={postType === 'Homemade'} onChange={() => setPostType('Homemade')} />
+                        <span className="label-text">Homemade</span>
+                    </label>
+                    <label className="label cursor-pointer">
+                        <input type="radio" name="radio-2" className="radio radio-primary" checked={postType === 'Restaurant'} onChange={() => setPostType('Restaurant')} />
+                        <span className="label-text">Restaurant</span>
+                    </label>
+                </div>
                 </div>
                 <div className="w-1/2 flex flex-col gap-4" style={{ marginRight: '5%' }}>
                     <input
@@ -76,13 +149,32 @@ export default function CreatePostPage() {
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                     />
-                    {/* <div className="rating">
-                        <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" />
-                        <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" />
-                        <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" />
-                        <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" />
-                        <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" checked />
-                    </div> */}
+                     <div className="form-control">
+                    <label className="label cursor-pointer">
+                        <span className="label-text">Add Additional Ratings</span>
+                        <input type="checkbox" className="toggle" checked={showAdditionalRatings} onChange={() => setShowAdditionalRatings(!showAdditionalRatings)} />
+                    </label>
+                    </div>
+
+                    {/* Conditional Rendering of Additional Ratings */}
+                    {showAdditionalRatings && (
+                        <div>
+
+                            {postType === 'Restaurant' ? (
+                                <>
+                                    <StarRating category="ambience" />
+                                    <StarRating category="price" />
+                                    <StarRating category="flavor" />
+                                </>
+                            ) : (
+                                <>
+                                    <StarRating category="difficulty" />
+                                    <StarRating category="price" />
+                                    <StarRating category="flavor" />
+                                </>
+                            )}
+                        </div>
+                    )}
                     <button
                         onClick={handleCreatePost}
                         className="btn btn-primary w-full rounded-lg shadow"
