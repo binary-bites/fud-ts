@@ -2,7 +2,8 @@ import React, { useRef, useState } from "react"
 import { Form, Button, Card, Alert } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContext"
 import { Link, useNavigate } from "react-router-dom"
-import customFetch from "../customFetch"
+import customFetch from "../utils/customFetch"
+import { Endpoints } from "../utils/Endpoints"
 
 export default function Signup() {
   const emailRef = useRef()
@@ -46,7 +47,7 @@ export default function Signup() {
         "email": emailRef.current.value
       };
     
-      const result = await customFetch("http://localhost:4000/api/user/check", "POST", body, "");
+      const result = await customFetch(Endpoints.check, "POST", body, "");
       console.log("RESPONSE", result)
       if (!result.ok) {
         throw new Error("Failed to check availability of username and email")
@@ -79,7 +80,7 @@ export default function Signup() {
         "dateOfBirth": dateOfBirthRef.current.value
       }
 
-      const result = await customFetch("http://localhost:4000/api/user/signup", "POST", body, "")
+      const result = await customFetch(Endpoints.signup, "POST", body, "")
       console.log(result)
       if (result.ok) {
         const responseBody = await result.json()

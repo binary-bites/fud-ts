@@ -1,8 +1,9 @@
-import React, { useRef, useState } from "react";
-import { Form, Button, Card, Alert } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../contexts/AuthContext";
-import customFetch from "../customFetch";
+import React, { useRef, useState } from "react"
+import { Form, Button, Card, Alert } from "react-bootstrap"
+import { useAuth } from "../contexts/AuthContext"
+import { Link, useNavigate } from "react-router-dom"
+import customFetch from "../utils/customFetch.js"
+import { Endpoints } from "../utils/Endpoints"
 
 export default function Login() {
   const emailRef = useRef();
@@ -26,14 +27,10 @@ export default function Login() {
       const token = firebaseUser.uid;
       console.log("token", token);
       const body = {
-        firebaseID: token,
-      };
-      const result = await customFetch(
-        "http://localhost:4000/api/user/login",
-        "POST",
-        body,
-        ""
-      );
+        "firebaseID": token
+      }
+      const result = await customFetch(Endpoints.login, "POST", body, "")
+
       if (result.ok) {
         const responseBody = await result.json();
         console.log(responseBody);

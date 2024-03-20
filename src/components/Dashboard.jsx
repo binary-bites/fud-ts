@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { Card, Button, Alert } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
-import customFetch from '../customFetch';
+import customFetch from '../utils/customFetch';
+import {Endpoints} from '../utils/Endpoints';
 
 export default function Dashboard() {
   const [error, setError] = useState("");
@@ -22,7 +23,6 @@ export default function Dashboard() {
 
 
   const handleTestRequest = async () => {
-    const url = "http://localhost:4000/api/post/create";
     const method = "POST"
     const body = {
       "title": "This is a test post",
@@ -31,7 +31,7 @@ export default function Dashboard() {
     
     try {
       const token = await currentUser.getIdToken(true); // Force token refresh
-      const result = await customFetch(url, method, body, token);
+      const result = await customFetch(Endpoints.createPost, method, body, token);
       if (!result.ok) {
         throw new Error("Failed to create post")
       }
