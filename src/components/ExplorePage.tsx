@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import PostCardContainer from './PostCardContainer.tsx';
-import { useAuth } from "../contexts/AuthContext.jsx";
-import { customGet } from '../customFetch.js'
+import { useAuth } from "../contexts/AuthContext";
+import { customGet } from '../utils/customFetch.js'
 import { IPost } from '../interfaces'
 import PostDetails from './PostDetails.tsx';
+import { Endpoints } from '../utils/Endpoints.tsx';
 
 export default function ExplorePage() {
     const { currentUser } = useAuth();
@@ -18,10 +19,9 @@ export default function ExplorePage() {
 
     useEffect(() => {
         const loadPosts = async () => {
-            const url = "http://localhost:4000/api/userActivity/getPosts";
             try {
                 const token = await currentUser.getIdToken(true); // Force token refresh
-                const result = await customGet(url, token);
+                const result = await customGet(Endpoints.getPosts, token);
                 if (!result.ok) {
                     throw new Error("Failed to get posts")
                 }

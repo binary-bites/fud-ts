@@ -16,6 +16,10 @@ export interface IPost {
     images: Array<string>;
 }
 
+export interface IImage {
+    url: string;
+}
+
 export interface IUser {
   username: string;
   dateOfBirth: Date | null;

@@ -2,7 +2,8 @@ import React, { useRef, useState } from "react"
 import { Form, Button, Card, Alert } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContext"
 import { Link, useNavigate } from "react-router-dom"
-import customFetch from "../customFetch"
+import customFetch from "../utils/customFetch.js"
+import { Endpoints } from "../utils/Endpoints"
 
 
 export default function Login() {
@@ -26,7 +27,7 @@ export default function Login() {
       const body = {
         "firebaseID": token
       }
-      const result = await customFetch("http://localhost:4000/api/user/login", "POST", body, "")
+      const result = await customFetch(Endpoints.login, "POST", body, "")
       if (result.ok) {
         const responseBody = await result.json()
         console.log(responseBody)
