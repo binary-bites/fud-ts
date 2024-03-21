@@ -50,53 +50,50 @@ export default function Login() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
-        <Card>
-          <Card.Body>
-            <div className="text-center">
-              <h2 className="text-3xl font-extrabold text-gray-900">
-                Log In
-              </h2>
-            </div>
-            {error && <Alert variant="danger">{error}</Alert>}
-            <Form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-              <Form.Group controlId="email">
-                <Form.Label>Email</Form.Label>
-                <Form.Control
+        <div className="card bg-base-100 shadow-xl">
+          <div className="card-body">
+            <h2 className="card-title justify-center text-3xl font-bold">Log In</h2>
+            {error && <div className="alert alert-error shadow-lg">{error}</div>}
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="form-control">
+                <label className="label" htmlFor="email">
+                  <span className="label-text">Email</span>
+                </label>
+                <input
                   type="email"
+                  id="email"
                   ref={emailRef}
                   required
-                  className="mt-1 p-2 block w-full rounded-md border border-gray-300 shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50"
+                  className="input input-bordered w-full"
                 />
-              </Form.Group>
-              <Form.Group controlId="password">
-                <Form.Label>Password</Form.Label>
-                <Form.Control
+              </div>
+              <div className="form-control">
+                <label className="label" htmlFor="password">
+                  <span className="label-text">Password</span>
+                </label>
+                <input
                   type="password"
+                  id="password"
                   ref={passwordRef}
                   required
-                  className="mt-1 p-2 block w-full rounded-md border border-gray-300 shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50"
+                  className="input input-bordered w-full"
                 />
-              </Form.Group>
-              <Button
+              </div>
+              <button
                 disabled={loading}
                 type="submit"
-                className="mt-2 w-full inline-flex items-center justify-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                className={`btn btn-primary w-full ${loading ? 'loading' : ''}`}
               >
-                {loading ? "Logging in..." : "Log In"}
-              </Button>
-            </Form>
-            <div className="text-center mt-4">
-              <Link to="/forgot-password" className="text-indigo-600">
+                Log In
+              </button>
+            </form>
+            <div className="flex flex-col items-center justify-center mt-4">
+              <Link to="/forgot-password" className="link link-primary">
                 Forgot Password?
               </Link>
+              <span>Need an account? <Link to="/signup" className="link link-primary">Sign Up</Link></span>
             </div>
-          </Card.Body>
-        </Card>
-        <div className="text-center mt-4">
-          Need an account?{" "}
-          <Link to="/signup" className="text-indigo-600">
-            Sign Up
-          </Link>
+          </div>
         </div>
       </div>
     </div>
