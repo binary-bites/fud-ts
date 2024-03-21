@@ -34,8 +34,12 @@ export default function Signup() {
       error.username = "Username must be at least 6 characters.";
     }
 
-    if (firstNameRef.current.value.length < 2 || lastNameRef.current.value.length < 2) {
-      error.name = "First and Last name must be at least 2 characters.";
+    if (firstNameRef.current.value.length < 2) {
+      error.firstName = "First name must be at least 2 characters.";
+    }
+
+    if (lastNameRef.current.value.length < 2) {
+      error.lastName = "Last name must be at least 2 characters.";
     }
 
     if (dateOfBirthRef.current.value === "") {
@@ -81,7 +85,6 @@ export default function Signup() {
           lastName: lastNameRef.current.value,
           dateOfBirth: dateOfBirthRef.current.value,
         };
-        ///////////// check 
       const result = await customFetch(Endpoints.signup, "POST", body, "");
       console.log(result);
       if (result.ok) {
@@ -101,7 +104,6 @@ export default function Signup() {
 
   setLoading(false);
 }
-//////
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
@@ -128,6 +130,7 @@ export default function Signup() {
                 />
                 {error.email && <p className="text-red-500 text-sm mt-1">{error.email}</p>}
               </Form.Group>
+
               <Form.Group controlId="username">
                 <Form.Label>Username</Form.Label>
                 <Form.Control
@@ -143,57 +146,80 @@ export default function Signup() {
                 {error.username && <p className="text-red-500 text-sm mt-1">{error.username}</p>}
               </Form.Group>
               
-
-
               <Form.Group controlId="firstName">
                 <Form.Label>First Name</Form.Label>
                 <Form.Control
                   type="text"
                   ref={firstNameRef}
                   required
-                  className="mt-1 p-2 block w-full rounded-md border border-gray-300 shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50"
+                  className={`mt-1 p-2 block w-full rounded-md border ${
+                    error.firstName ? 'border-red-500' : 'border-gray-300'
+                  } shadow-sm focus:outline-none ${
+                    error.firstName ? 'focus:border-red-500 focus:ring-red-500' : 'focus:border-indigo-500 focus:ring-indigo-500'
+                  } focus:ring-opacity-50`}
                 />
+                {error.firstName && <p className="text-red-500 text-sm mt-1">{error.firstName}</p>}
               </Form.Group>
+
               <Form.Group controlId="lastName">
                 <Form.Label>Last Name</Form.Label>
                 <Form.Control
                   type="text"
                   ref={lastNameRef}
                   required
-                  className="mt-1 p-2 block w-full rounded-md border border-gray-300 shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50"
+                  className={`mt-1 p-2 block w-full rounded-md border ${
+                    error.lastName ? 'border-red-500' : 'border-gray-300'
+                  } shadow-sm focus:outline-none ${
+                    error.lastName ? 'focus:border-red-500 focus:ring-red-500' : 'focus:border-indigo-500 focus:ring-indigo-500'
+                  } focus:ring-opacity-50`}
                 />
+                {error.lastName && <p className="text-red-500 text-sm mt-1">{error.lastName}</p>}
               </Form.Group>
+
               <Form.Group controlId="dateOfBirth">
                 <Form.Label>Date of Birth</Form.Label>
                 <Form.Control
                   type="date"
                   ref={dateOfBirthRef}
                   required
-                  className="mt-1 p-2 block w-full rounded-md border border-gray-300 shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50"
+                  className={`mt-1 p-2 block w-full rounded-md border ${
+                    error.dateOfBirth ? 'border-red-500' : 'border-gray-300'
+                  } shadow-sm focus:outline-none ${
+                    error.dateOfBirth ? 'focus:border-red-500 focus:ring-red-500' : 'focus:border-indigo-500 focus:ring-indigo-500'
+                  } focus:ring-opacity-50`}
                 />
+                {error.dateOfBirth && <p className="text-red-500 text-sm mt-1">{error.dateOfBirth}</p>}
               </Form.Group>
+
               <Form.Group controlId="password">
                 <Form.Label>Password</Form.Label>
                 <Form.Control
                   type="password"
                   ref={passwordRef}
                   required
-                  className="mt-1 p-2 block w-full rounded-md border border-gray-300 shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50"
+                  className={`mt-1 p-2 block w-full rounded-md border ${
+                    error.password ? 'border-red-500' : 'border-gray-300'
+                  } shadow-sm focus:outline-none ${
+                    error.password ? 'focus:border-red-500 focus:ring-red-500' : 'focus:border-indigo-500 focus:ring-indigo-500'
+                  } focus:ring-opacity-50`}
                 />
+                {error.password && <p className="text-red-500 text-sm mt-1">{error.password}</p>}
               </Form.Group>
+
               <Form.Group controlId="password-confirm">
                 <Form.Label>Password Confirmation</Form.Label>
                 <Form.Control
                   type="password"
                   ref={passwordConfirmRef}
                   required
-                  className="mt-1 p-2 block w-full rounded-md border border-gray-300 shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50"
+                  className={`mt-1 p-2 block w-full rounded-md border ${
+                    error.passwordConfirm ? 'border-red-500' : 'border-gray-300'
+                  } shadow-sm focus:outline-none ${
+                    error.passwordConfirm ? 'focus:border-red-500 focus:ring-red-500' : 'focus:border-indigo-500 focus:ring-indigo-500'
+                  } focus:ring-opacity-50`}
                 />
+                {error.passwordConfirm && <p className="text-red-500 text-sm mt-1">{error.passwordConfirm}</p>}
               </Form.Group>
-              
-
-
-
 
               <Button
                 disabled={loading}
