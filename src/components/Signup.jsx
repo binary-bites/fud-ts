@@ -20,25 +20,26 @@ export default function Signup() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    const error = {};
 
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-      return setError("Passwords do not match");
+      error.passwordConfirm = "Passwords do not match.";
     }
 
     if (passwordRef.current.value.length < 6) {
-      return setError("Password must be at least 6 characters");
+      error.password = "Password must be at least 6 characters.";
     }
 
     if (usernameRef.current.value.length < 6) {
-      return setError("Username must be at least 6 characters");
+      error.username = "Username must be at least 6 characters.";
     }
 
     if (firstNameRef.current.value.length < 2 || lastNameRef.current.value.length < 2) {
-      return setError("First and Last name must be at least 2 characters");
+      error.name = "First and Last name must be at least 2 characters.";
     }
 
     if (dateOfBirthRef.current.value === "") {
-      return setError("Date of Birth is required");
+      error.dateOfBirth = "Date of Birth is required.";
     }
 
     try {
@@ -55,30 +56,32 @@ export default function Signup() {
       const response = await result.json();
 
       if (response.usernameExists) {
-        return setError("Username already taken.");
+        error.username = "Username already taken.";
       }
       if (response.emailExists) {
-        return setError("Email already exists. Try different email or use forgot password.");
+        error.email = "Email already exists. Try different email or use forgot password.";
       }
     } catch (error) {
       console.error(error);
-      return setError(error.message);
+      error.general = error.message;
     }
 
-    try {
-      setError("");
-      setLoading(true);
-      const userCredential = await signup(emailRef.current.value, passwordRef.current.value);
-      const firebaseUser = userCredential.user;
-      const body = {
-        username: usernameRef.current.value,
-        email: emailRef.current.value,
-        firebaseID: firebaseUser.uid,
-        firstName: firstNameRef.current.value,
-        lastName: lastNameRef.current.value,
-        dateOfBirth: dateOfBirthRef.current.value,
-      };
+    setError(error);
 
+    if (Object.keys(error).length === 0) {
+      try {
+        setLoading(true);
+        const userCredential = await signup(emailRef.current.value, passwordRef.current.value);
+        const firebaseUser = userCredential.user;
+        const body = {
+          username: usernameRef.current.value,
+          email: emailRef.current.value,
+          firebaseID: firebaseUser.uid,
+          firstName: firstNameRef.current.value,
+          lastName: lastNameRef.current.value,
+          dateOfBirth: dateOfBirthRef.current.value,
+        };
+        ///////////// check 
       const result = await customFetch(Endpoints.signup, "POST", body, "");
       console.log(result);
       if (result.ok) {
@@ -91,13 +94,14 @@ export default function Signup() {
         throw new Error(responseBody.error);
       }
     } catch (error) {
-      console.log(error);
-      setError(error.message);
+      console.error(error);
+      setError({ general: error.message });
     }
-
-    setLoading(false);
   }
 
+  setLoading(false);
+}
+//////
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
@@ -108,7 +112,7 @@ export default function Signup() {
                 Sign Up
               </h2>
             </div>
-            {error && <Alert variant="danger">{error}</Alert>}
+            {error.general && <Alert variant="danger">{error.general}</Alert>}
             <Form className="mt-8 space-y-6" onSubmit={handleSubmit}>
               <Form.Group controlId="email">
                 <Form.Label>Email</Form.Label>
@@ -116,8 +120,13 @@ export default function Signup() {
                   type="email"
                   ref={emailRef}
                   required
-                  className="mt-1 p-2 block w-full rounded-md border border-gray-300 shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50"
+                  className={`mt-1 p-2 block w-full rounded-md border ${
+                    error.email ? 'border-red-500' : 'border-gray-300'
+                  } shadow-sm focus:outline-none ${
+                    error.email ? 'focus:border-red-500 focus:ring-red-500' : 'focus:border-indigo-500 focus:ring-indigo-500'
+                  } focus:ring-opacity-50`}
                 />
+                {error.email && <p className="text-red-500 text-sm mt-1">{error.email}</p>}
               </Form.Group>
               <Form.Group controlId="username">
                 <Form.Label>Username</Form.Label>
@@ -125,9 +134,17 @@ export default function Signup() {
                   type="text"
                   ref={usernameRef}
                   required
-                  className="mt-1 p-2 block w-full rounded-md border border-gray-300 shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50"
+                  className={`mt-1 p-2 block w-full rounded-md border ${
+                    error.username ? 'border-red-500' : 'border-gray-300'
+                  } shadow-sm focus:outline-none ${
+                    error.username ? 'focus:border-red-500 focus:ring-red-500' : 'focus:border-indigo-500 focus:ring-indigo-500'
+                  } focus:ring-opacity-50`}
                 />
+                {error.username && <p className="text-red-500 text-sm mt-1">{error.username}</p>}
               </Form.Group>
+              
+
+
               <Form.Group controlId="firstName">
                 <Form.Label>First Name</Form.Label>
                 <Form.Control
@@ -173,6 +190,11 @@ export default function Signup() {
                   className="mt-1 p-2 block w-full rounded-md border border-gray-300 shadow-sm focus:outline-none focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50"
                 />
               </Form.Group>
+              
+
+
+
+
               <Button
                 disabled={loading}
                 type="submit"
