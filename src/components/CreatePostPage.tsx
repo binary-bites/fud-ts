@@ -63,7 +63,7 @@ export default function CreatePostPage() {
         images.forEach((file, index) => {
             formData.append(`image${index}`, file); // Append each file object
         });
-        
+        formData.append('type', postType)
         try {
             const token = await currentUser.getIdToken(true); // Force token refresh
             const result = await customFetch(Endpoints.createPost, method, formData, token);
