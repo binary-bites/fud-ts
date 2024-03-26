@@ -33,20 +33,36 @@ export default async function customFetch(url, method, body, token) {
   }
 }
 
+// if no token parameter passed, does not send headers
 export async function customGet(url, token) {
-  // Define headers
-  const headers = new Headers({
-    'Authorization': `Bearer ${token}`,
-    'Content-Type': 'application/json',
-  });
-
   let response = null;
+
   try {
     // Perform the fetch operation
-    const fetchResponse = await fetch(url, {
-      method: "GET",
-      headers: headers,
-    });
+    let fetchResponse
+
+    if (token == "") {
+      const headers = new Headers({
+        'Content-Type': 'application/json',
+      });
+
+      fetchResponse = await fetch(url, {
+        method: "GET",
+        headers: headers,
+      });
+    }
+
+    else {
+      //only put authorization in header if a token is provided
+      const headers = new Headers({
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      });
+      fetchResponse = await fetch(url, {
+        method: "GET",
+        headers: headers,
+      });
+    }
 
     return fetchResponse;
   } catch (error) {
