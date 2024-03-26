@@ -1,6 +1,7 @@
 // modified to support ts from: https://mongoosejs.com/docs/typescript.html
 export interface IPost {
-    id: string;
+    //leading underscore to match mongodb schema, not worth translating in code
+    _id: string;
     title: string;
     content: string;
     date: Date;
@@ -31,7 +32,7 @@ export interface IUser {
 }
 
 export interface IComment {
-    id: string;
+    _id: string;
     user: IUser;
     post: IPost;
     content: string;

@@ -7,7 +7,7 @@ interface PostDetailsProps {
 }
 
 const PostDetails: React.FC<PostDetailsProps> = ({ post, onClose }) => {
-    const { images, title, content } = post;
+    const { images, title, content, _id} = post;
     return (
         <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full" onClick={onClose}>
             <div className="relative top-20 mx-auto p-5 border w-3/4 shadow-lg rounded-md bg-white" onClick={e => e.stopPropagation()}>
@@ -35,6 +35,7 @@ const PostDetails: React.FC<PostDetailsProps> = ({ post, onClose }) => {
                                 Post
                             </button>
                         </form>
+                        <p>PostID: {_id}</p>
                     </div>
                 </div>
             </div>
