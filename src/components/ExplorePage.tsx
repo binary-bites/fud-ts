@@ -13,21 +13,27 @@ export default function ExplorePage() {
     const [selectedPost, setSelectedPost] = useState<IPost | null>(null);
 
     const handlePostClick = (post: IPost) => {
-        console.log
+        console.log("clicked on a post")
         setSelectedPost(post);
     };
 
     useEffect(() => {
         const loadPosts = async () => {
             try {
-                const token = await currentUser.getIdToken(true); // Force token refresh
-                const result = await customGet(Endpoints.getPosts, token);
+                let result
+                if (currentUser) {
+                    const token = await currentUser.getIdToken(true); // Force token refresh
+                    result = await customGet(Endpoints.getPosts, token);
+                } else {
+                    result = await customGet(Endpoints.getPostsLoggedOut)
+                }
                 if (!result.ok) {
                     throw new Error("Failed to get posts")
                 }
                 const response = await result.json();
                 // Update the state with the fetched posts
                 setPosts(response); // Assuming the response is an array of posts
+
             } catch (error) {
                 console.error(error);
             }

@@ -1,0 +1,5 @@
+#+title: Gameplan
+
+* Explore Page
+- [X] Modify page to also grab posts when not logged in
+- [ ] rework post details to daisyUI modal
