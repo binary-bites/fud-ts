@@ -10,7 +10,7 @@ const PostDetails: React.FC<PostDetailsProps> = ({ post, onClose }) => {
   const { images, title, content, _id } = post;
   return (
     <div>
-      <dialog id="_id" className="modal modal-open">
+      <dialog id={_id} className="modal modal-open">
         <div className="modal-box w-full max-w-4xl"
           onClick={(e) => e.stopPropagation() /*prevent clicks in box from closing*/}
         >

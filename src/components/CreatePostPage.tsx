@@ -2,18 +2,11 @@ import { ChangeEvent, useState } from 'react';
 import { useAuth } from "../contexts/AuthContext";
 import  {customFetch} from '../utils/customFetch.js'
 import { useNavigate } from "react-router-dom";
-import { IImage } from '../interfaces';
+import { IRating } from '../interfaces';
 import { Endpoints } from '../utils/Endpoints';
 
 interface StarRatingProps {
-  category: keyof RatingsState;
-}
-
-interface RatingsState {
-  ambience: number;
-  price: number;
-  flavor: number;
-  difficulty: number;
+  category: keyof IRating;
 }
 
 export default function CreatePostPage() {
@@ -24,7 +17,7 @@ export default function CreatePostPage() {
   const [description, setDescription] = useState<string>('')
   const [postType, setPostType] = useState<string>('Homemade');
   const [showAdditionalRatings, setShowAdditionalRatings] = useState(false);
-  const [ratings, setRatings] = useState<RatingsState>({
+  const [ratings, setRatings] = useState<IRating>({
     ambience: 5,
     price: 5,
     flavor: 5,
@@ -81,7 +74,7 @@ export default function CreatePostPage() {
 
   const StarRating: React.FC<StarRatingProps> = ({ category }) => {
     const updateRating = (value: number) => {
-      setRatings((prevRatings: RatingsState) => ({ ...prevRatings, [category]: value }));
+      setRatings((prevRatings: IRating) => ({ ...prevRatings, [category]: value }));
     };
 
     return (
