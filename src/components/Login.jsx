@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react"
 import { Form, Button, Card, Alert } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContext"
 import { Link, useNavigate } from "react-router-dom"
-import customFetch from "../utils/customFetch.js"
+import {customFetch} from "../utils/customFetch.js"
 import { Endpoints } from "../utils/Endpoints"
 
 export default function Login() {

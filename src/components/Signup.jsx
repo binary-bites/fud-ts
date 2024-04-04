@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
-import customFetch from "../utils/customFetch";
+import {customFetch} from "../utils/customFetch";
 import { Endpoints } from "../utils/Endpoints";
 
 export default function Signup() {

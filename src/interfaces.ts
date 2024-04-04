@@ -21,7 +21,7 @@ export interface IImage {
     url: string;
 }
 
-export interface IUser {
+export interface IUser {    
   username: string;
   dateOfBirth: Date | null;
   firstName: string;
@@ -29,6 +29,17 @@ export interface IUser {
   email: string | null;
   deleted: boolean;
   firebaseID: string | null;
+}
+
+export interface IProfile {
+    bio: string;
+    profilePicture: string;
+    followers: string[];
+    following: string[];
+    savedPosts: string[];
+    firstName: string
+    lastName: string
+    profileFile: File | null;
 }
 
 export interface IComment {

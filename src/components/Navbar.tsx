@@ -34,7 +34,7 @@ export default function Navbar() {
                         )}
                         {currentUser && (
                           <>
-                            <li><a>Profile Page</a></li>
+                            <li><Link to="/profile">Profile Page</Link></li>
                             {/* <li><Link to="/dashboard">Dashboard</Link></li> */}
                             <li><button onClick={handleLogout}>Log Out</button></li>
                           </>
