@@ -7,7 +7,7 @@ interface PostDetailsProps {
 }
 
 const PostDetails: React.FC<PostDetailsProps> = ({ post, onClose }) => {
-  const { images, title, content, _id } = post;
+  const { images, title, content, ratings, _id } = post;
   return (
     <div>
       <dialog id={_id} className="modal modal-open">
@@ -24,7 +24,15 @@ const PostDetails: React.FC<PostDetailsProps> = ({ post, onClose }) => {
             </div>
             <div className="flex-auto p-6">
               <div className="mb-4">
+                {/* title */}
                 <h1 className="text-xl font-semibold mb-2">{title}</h1>
+
+                {/* poster ratings */}
+
+
+
+                
+                {/* content */}
                 <div className="text-sm font-medium text-gray-500 mb-4">
                   {content}
                 </div>
