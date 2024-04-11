@@ -1,10 +1,15 @@
 // modified to support ts from: https://mongoosejs.com/docs/typescript.html
 
+enum RatingType {
+  ambience,
+  price,
+  flavor,
+  difficulty
+}
+
 export interface IRating {
-  ambience: number;
-  price: number;
-  flavor: number;
-  difficulty: number;
+  ratingType: RatingType;
+  stars: number;
 }
 
 
