@@ -142,23 +142,22 @@ export default function ProfilePage() {
                 </div>
 
                 {isModalOpen && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex justify-center items-center">
-                    <div className="bg-white p-4 rounded-lg max-w-sm mx-auto">
-                        <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
-                            <h2 className="text-xl md:text-2xl lg:text-3xl font-bold">Edit Profile</h2>
-                            <input type="text" name="firstName" value={userProfile.firstName} onChange={handleInputChange} placeholder="First Name" className="border p-2"/>
-                            <input type="text" name="lastName" value={userProfile.lastName} onChange={handleInputChange} placeholder="Last Name" className="border p-2"/>
-                            <input type="text" name="bio" value={userProfile.bio} onChange={handleInputChange} placeholder="Bio" className="border p-2"/>
-                            {/* File Upload for Profile Picture */}
-                            <input type="file" name="profilePicture" onChange={handleFileChange} className="border p-2"/>
-                            {/* Optionally, display the selected image preview */}
-                            {profilePicturePreview && <img src={profilePicturePreview} alt="Preview" className="mx-auto w-24 h-24 rounded-full object-cover"/>}
-                            <button type="submit" className="bg-blue-500 text-white p-2 rounded hover:bg-blue-700">Submit</button>
+                    <div className="modal modal-open">
+                        <div className="modal-box">
+                        <form onSubmit={handleSubmit} className="form-control">
+                            <h2 className="text-2xl font-bold mb-4">Edit Profile</h2>
+                            <input type="text" name="firstName" value={userProfile.firstName} onChange={handleInputChange} placeholder="First Name" className="input input-bordered"/>
+                            <input type="text" name="lastName" value={userProfile.lastName} onChange={handleInputChange} placeholder="Last Name" className="input input-bordered"/>
+                            <input type="text" name="bio" value={userProfile.bio} onChange={handleInputChange} placeholder="Bio" className="input input-bordered"/>
+                            <input type="file" name="profilePicture" onChange={handleFileChange} className="input input-bordered"/>
+                            {profilePicturePreview && <img src={profilePicturePreview} alt="Preview" className="mx-auto w-24 h-24 rounded-full object-cover mt-2"/>}
+                            <button type="submit" className="btn btn-primary mt-4">Submit</button>
                         </form>
-                        <button onClick={() => closeModal()} className="mt-4 text-sm text-blue-500">Cancel</button>
+                        <button onClick={() => closeModal()} className="btn btn-link mt-4">Cancel</button>
+                        </div>
                     </div>
-                </div>
-            )}
+                )}
+
     
                 {/* Post Details Modal/Container - Conditional rendering based on selectedPost */}
                 {selectedPost && <PostDetails post={selectedPost} onClose={() => setSelectedPost(null)} />}
