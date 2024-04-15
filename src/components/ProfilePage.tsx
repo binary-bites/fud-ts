@@ -127,7 +127,7 @@ export default function ProfilePage() {
         <div className="flex flex-col items-center" onClick={() => setIsModalOpen(true)}>
           {/* Profile Picture */}
           <div className="w-24 h-24 md:w-40 md:h-40 lg:w-48 lg:h-48 overflow-hidden rounded-full border-2 border-gray-300 shadow-lg">
-            <img src={userProfile.profilePicture || "https://via.placeholder.com/150"} alt="Profile" className="w-full h-full object-cover" />
+            <img src={userProfile.profilePicture} className="w-full h-full object-cover" />
           </div>
 
           {/* Name and Bio */}
