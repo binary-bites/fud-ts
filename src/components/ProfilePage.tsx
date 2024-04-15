@@ -154,8 +154,11 @@ export default function ProfilePage() {
                 {profilePicturePreview && <img src={profilePicturePreview} alt="Preview" className="mx-auto w-24 h-24 rounded-full object-cover mt-2" />}
                 <button type="submit" className="btn btn-primary mt-4">Submit</button>
               </form>
-              <button onClick={() => closeModal()} className="btn btn-link mt-4">Cancel</button>
             </div>
+            {/* invisible button - click anywhere outside box to close */}
+            <form method="dialog" className="modal-backdrop">
+              <button onClick={() => closeModal()}>close</button>
+            </form>
           </div>
         )}
 
