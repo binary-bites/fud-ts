@@ -5,6 +5,7 @@ import { IPost, IProfile } from '../interfaces';
 import { Endpoints } from '../utils/Endpoints';
 import PostCardContainer from './PostCardContainer';
 import PostDetails from './PostDetails';
+import { InputBox, TextArea, FileInput } from './FormElements.tsx';
 import { get, set } from 'mongoose';
 
 export default function ProfilePage() {
@@ -146,10 +147,10 @@ export default function ProfilePage() {
             <div className="modal-box">
               <form onSubmit={handleSubmit} className="form-control">
                 <h2 className="text-2xl font-bold mb-4">Edit Profile</h2>
-                <input type="text" name="firstName" value={userProfile.firstName} onChange={handleInputChange} placeholder="First Name" className="input input-bordered" />
-                <input type="text" name="lastName" value={userProfile.lastName} onChange={handleInputChange} placeholder="Last Name" className="input input-bordered" />
-                <input type="text" name="bio" value={userProfile.bio} onChange={handleInputChange} placeholder="Bio" className="input input-bordered" />
-                <input type="file" name="profilePicture" onChange={handleFileChange} className="input input-bordered" />
+                <InputBox label="First Name" name="firstName" value={userProfile.firstName} onChange={handleInputChange} placeholder="Jane" />
+                <InputBox label="Last Name" name="lastName" value={userProfile.lastName} onChange={handleInputChange} placeholder="Doe" />
+                <TextArea name="bio" value={userProfile.bio} onChange={handleInputChange} label="Bio" placeholder="Boy, I sure like food." />
+                <FileInput label="Profile Picture" name="profilePicture" onChange={handleFileChange} />
                 {profilePicturePreview && <img src={profilePicturePreview} alt="Preview" className="mx-auto w-24 h-24 rounded-full object-cover mt-2" />}
                 <button type="submit" className="btn btn-primary mt-4">Submit</button>
               </form>
