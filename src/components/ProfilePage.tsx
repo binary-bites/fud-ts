@@ -133,7 +133,7 @@ export default function ProfilePage() {
           {/* Name and Bio */}
           <div className="text-center mt-4">
             <h1 className="text-xl md:text-2xl lg:text-3xl font-bold">{userProfile.firstName} {userProfile.lastName}</h1>
-            <p className="text-md md:text-lg lg:text-xl mt-2 text-gray-600">{userProfile.bio}</p>
+            <p className="text-md md:text-lg lg:text-xl mt-2 text-gray-600 whitespace-pre-wrap">{userProfile.bio}</p>
           </div>
         </div>
 
