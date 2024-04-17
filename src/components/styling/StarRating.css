@@ -1,0 +1,11 @@
+/* thanks ChatGPT!*/
+/* Extend the .rating class with modifications for static (non-animated) display */
+.rating-static {
+  & input {
+    animation: none !important; /* Important to ensure override any other styles */
+  }
+  & input:focus-visible {
+    transform: none !important; /* Disable the focus transform effect */
+    transition: none !important; /* Disable all transitions */
+  }
+}

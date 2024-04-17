@@ -1,10 +1,10 @@
 // modified to support ts from: https://mongoosejs.com/docs/typescript.html
 
 enum RatingType {
-  ambience,
-  price,
-  flavor,
-  difficulty
+  ambience = "ambience",
+  price = "price",
+  flavor = "flavor",
+  difficulty = "difficulty"
 }
 
 export interface IRating {

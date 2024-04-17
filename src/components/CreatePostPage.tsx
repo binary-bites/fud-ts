@@ -72,7 +72,7 @@ export default function CreatePostPage() {
   };
 
 
-  const StarRating: React.FC<StarRatingProps> = ({ category }) => {
+  const EditableStarRating: React.FC<StarRatingProps> = ({ category }) => {
     const updateRating = (value: number) => {
       setRatings((prevRatings: IRating) => ({ ...prevRatings, [category]: value }));
     };
@@ -160,15 +160,15 @@ export default function CreatePostPage() {
 
               {postType === 'Restaurant' ? (
                 <>
-                  <StarRating category="ambience" />
-                  <StarRating category="price" />
-                  <StarRating category="flavor" />
+                  <EditableStarRating category="ambience" />
+                  <EditableStarRating category="price" />
+                  <EditableStarRating category="flavor" />
                 </>
               ) : (
                 <>
-                  <StarRating category="difficulty" />
-                  <StarRating category="price" />
-                  <StarRating category="flavor" />
+                  <EditableStarRating category="difficulty" />
+                  <EditableStarRating category="price" />
+                  <EditableStarRating category="flavor" />
                 </>
               )}
             </div>
