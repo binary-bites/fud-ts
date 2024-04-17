@@ -1,5 +1,4 @@
 import React, { useRef, useState } from "react"
-import { Form, Button, Card, Alert } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContext"
 import { Link, useNavigate } from "react-router-dom"
 import {customFetch} from "../utils/customFetch.js"
@@ -48,9 +47,9 @@ export default function Login() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
-        <div className="card bg-base-100 shadow-xl">
+        <div className="card bg-base-200 shadow-xl">
           <div className="card-body">
             <h2 className="card-title justify-center text-3xl font-bold">Log In</h2>
             {error && <div className="alert alert-error shadow-lg">{error}</div>}
