@@ -1,18 +1,62 @@
 import React from "react";
-import { IPost } from "../interfaces";
-
+import { IPost, IComment } from "../interfaces";
+import { useState, useEffect } from 'react';
+import { useAuth } from "../contexts/AuthContext";
+import { customGet, customFetch } from '../utils/customFetch';
+import { Endpoints } from '../utils/Endpoints';
+import { set } from "mongoose";
+import { query } from "express";
 interface PostDetailsProps {
   post: IPost;
   onClose: () => void; // Function to call when closing the popover
 }
 
 const PostDetails: React.FC<PostDetailsProps> = ({ post, onClose }) => {
-  const { images, title, content, _id } = post;
+  const { images, title, content, _id, comments } = post;
+  const { currentUser } = useAuth();
+    // Use useState to hold the posts fetched from the API
+  const [currComments, setCurrComments] = useState<IComment[]>(comments);
+  const [newComment, setNewComment] = useState<string>(""); 
+
+  async function handleCreateComment() {
+    try {
+      const body = {
+        content: newComment,
+        postID: _id,
+      }
+      const token = await currentUser.getIdToken(true); // Force token refresh
+      const response = await customFetch(Endpoints.createComment, 'POST', body, token);
+      if (!response.ok) {
+        throw new Error("Failed to create comment");
+      }
+      const createdComment = await response.json();
+      setNewComment("");
+      fetchComments()
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async function fetchComments() {
+    try {
+      const queryParams = new URLSearchParams({ postID: _id });
+      const token = await currentUser.getIdToken(true);
+      const url = `${Endpoints.getPost}${queryParams.toString()}`;
+      const response = await customGet(url, token);
+      if (!response.ok) throw new Error("Failed to get comments");
+      const postDetails = await response.json();
+      console.log("fetched post details", postDetails )
+      await setCurrComments(postDetails.comments);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  
   return (
     <div>
       <dialog id="_id" className="modal modal-open">
         <div className="modal-box w-full max-w-4xl"
-          onClick={(e) => e.stopPropagation() /*prevent clicks in box from closing*/}
+          onClick={(e) => e.stopPropagation()}
         >
           <div className="flex">
             <div className="flex-none w-60 relative">
@@ -60,12 +104,27 @@ const PostDetails: React.FC<PostDetailsProps> = ({ post, onClose }) => {
                   </div>
                 </div>
               </div>
+              {/* Comments Section */}
+              <div className="mb-4">
+                <h2 className="text-lg font-semibold">Comments</h2>
+                <div className="space-y-2">
+                  {currComments.map((comment) => (
+                    <div key={comment._id} className="bg-gray-100 p-3 rounded-lg">
+                      <p className="text-sm font-medium">{comment.content}</p>
+                      <p className="text-xs text-gray-600">
+                        By {comment.user.firstName} {comment.user.lastName} - {new Date(comment.date).toLocaleDateString()}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
               <form className="flex items- space-x-3">
-                <input
+              <input
                   type="text"
                   placeholder="Add a comment…"
-                  /* className="flex-1 rounded-md p-2 border-gray-300" */
                   className="input input-bordered w-full flex-1"
+                  value={newComment}
+                  onChange={(e) => setNewComment(e.target.value)}
                   style={{
                     borderColor: "rgba(209, 213, 219)",
                     color: "black",
@@ -76,9 +135,8 @@ const PostDetails: React.FC<PostDetailsProps> = ({ post, onClose }) => {
                   type="submit"
                   className="btn btn-primary"
                   onClick={(e) => {
-                    //prevent button from reloading page
-                    e.preventDefault()
-                    //will add comment posting logic later
+                    e.preventDefault();
+                    handleCreateComment();
                   }}
                 >
                   Post
@@ -87,7 +145,6 @@ const PostDetails: React.FC<PostDetailsProps> = ({ post, onClose }) => {
             </div>
           </div>
         </div>
-        {/* invisible button - click anywhere outside box to close */}
         <form method="dialog" className="modal-backdrop">
           <button onClick={onClose}>close</button>
         </form>
