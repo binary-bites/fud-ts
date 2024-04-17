@@ -1,5 +1,6 @@
 import React from "react";
 import { IPost } from "../interfaces";
+import { StarRating } from "./StarRating"
 
 interface PostDetailsProps {
   post: IPost;
@@ -7,10 +8,16 @@ interface PostDetailsProps {
 }
 
 const PostDetails: React.FC<PostDetailsProps> = ({ post, onClose }) => {
-  const { images, title, content, _id } = post;
+  const { images, title, content, ratings, _id } = post;
+
+  //debug logging
+  if (ratings.length > 0) {
+    console.log(ratings)
+  }
+
   return (
     <div>
-      <dialog id="_id" className="modal modal-open">
+      <dialog id={_id} className="modal modal-open">
         <div className="modal-box w-full max-w-4xl"
           onClick={(e) => e.stopPropagation() /*prevent clicks in box from closing*/}
         >
@@ -24,7 +31,20 @@ const PostDetails: React.FC<PostDetailsProps> = ({ post, onClose }) => {
             </div>
             <div className="flex-auto p-6">
               <div className="mb-4">
+                {/* title */}
                 <h1 className="text-xl font-semibold mb-2">{title}</h1>
+
+                {/* poster ratings - conditionally display*/}
+                {(ratings.length > 0) &&
+                  <div>
+                    <StarRating rating={ratings[0]}></StarRating>
+                    <StarRating rating={ratings[1]}></StarRating>
+                    <StarRating rating={ratings[2]}></StarRating>
+                  </div>
+                }
+
+
+                {/* content */}
                 <div className="text-sm font-medium text-gray-500 mb-4">
                   {content}
                 </div>
