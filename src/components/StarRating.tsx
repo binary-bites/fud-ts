@@ -11,7 +11,7 @@ export const StarRating: React.FC<StarRatingProps> = ({ rating }) => {
   return (
     <div className="flex flex-row my-2 justify-right">
       {/* rating display */}
-      <div className="rating rating-static mr-3">
+      <div className="rating-static mr-3">
         {[...Array(5)].map((_, index) => (
           <input
             key={index}
