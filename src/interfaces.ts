@@ -1,4 +1,18 @@
 // modified to support ts from: https://mongoosejs.com/docs/typescript.html
+
+enum RatingType {
+  ambience = "ambience",
+  price = "price",
+  flavor = "flavor",
+  difficulty = "difficulty"
+}
+
+export interface IRating {
+  ratingType: RatingType;
+  stars: number;
+}
+
+
 export interface IPost {
     //leading underscore to match mongodb schema, not worth translating in code
     _id: string;
@@ -10,10 +24,7 @@ export interface IPost {
     likes: IUser[];
     dislikes: IUser[];
     comments: IComment[];
-    ratings: {
-        ratingType: string;
-        stars: number;
-    }[];
+    ratings: IRating[];
     images: Array<string>;
 }
 

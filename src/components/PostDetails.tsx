@@ -4,15 +4,15 @@ import { useState, useEffect } from 'react';
 import { useAuth } from "../contexts/AuthContext";
 import { customGet, customFetch } from '../utils/customFetch';
 import { Endpoints } from '../utils/Endpoints';
-import { set } from "mongoose";
-import { query } from "express";
+import { StarRating } from "./StarRating"
+
 interface PostDetailsProps {
   post: IPost;
   onClose: () => void; // Function to call when closing the popover
 }
 
 const PostDetails: React.FC<PostDetailsProps> = ({ post, onClose }) => {
-  const { images, title, content, _id, comments } = post;
+  const { images, title, content, ratings, comments, _id } = post;
   const { currentUser } = useAuth();
     // Use useState to hold the posts fetched from the API
   const [currComments, setCurrComments] = useState<IComment[]>(comments);
@@ -52,9 +52,10 @@ const PostDetails: React.FC<PostDetailsProps> = ({ post, onClose }) => {
     }
   }
   
+
   return (
     <div>
-      <dialog id="_id" className="modal modal-open">
+      <dialog id={_id} className="modal modal-open">
         <div className="modal-box w-full max-w-4xl"
           onClick={(e) => e.stopPropagation()}
         >
@@ -68,7 +69,20 @@ const PostDetails: React.FC<PostDetailsProps> = ({ post, onClose }) => {
             </div>
             <div className="flex-auto p-6">
               <div className="mb-4">
+                {/* title */}
                 <h1 className="text-xl font-semibold mb-2">{title}</h1>
+
+                {/* poster ratings - conditionally display*/}
+                {(ratings.length > 0) &&
+                  <div>
+                    <StarRating rating={ratings[0]}></StarRating>
+                    <StarRating rating={ratings[1]}></StarRating>
+                    <StarRating rating={ratings[2]}></StarRating>
+                  </div>
+                }
+
+
+                {/* content */}
                 <div className="text-sm font-medium text-gray-500 mb-4">
                   {content}
                 </div>

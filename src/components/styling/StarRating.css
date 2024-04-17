@@ -1,0 +1,35 @@
+/* same definition as daisyUI, but with animations removed */
+.rating-static {
+  & input {
+    @apply appearance-none;  /* Remove default browser styling */
+    -webkit-appearance: none;
+  }
+  :where(input) {
+    animation: none; /* Disabling all animations */
+    @apply bg-base-content h-6 w-6 bg-opacity-100; /* Tailwind classes for background, height, width, and opacity */
+  }
+  & .rating-hidden {
+    @apply w-2 bg-transparent; /* Width and background transparency */
+  }
+  input[type="radio"]:checked {
+    background-image: none; /* Removing background image when checked */
+  }
+  input:checked ~ input,
+  input[aria-checked="true"] ~ input {
+    @apply bg-opacity-20; /* Lowering opacity for subsequent inputs */
+  }
+  input:focus-visible {
+    @apply transition-transform duration-300 ease-out; /* Smooth transformation during focus */
+    transform: none; /* Remove transform effect on focus */
+  }
+
+  & input:active:focus {
+    animation: none; /* Disables animation on active focus */
+    transform: none; /* Remove transform effect on active focus */
+  }
+}
+.rating-half-no-animate {
+  :where(input:not(.rating-hidden)) {
+    @apply w-3; /* Half-width for "half-rating" inputs */
+  }
+}
