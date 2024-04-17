@@ -105,9 +105,9 @@ export default function Signup() {
 }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-indigo-100 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
-        <div className="card bg-base-100 shadow-xl">
+        <div className="card bg-base-200 shadow-xl">
           <div className="card-body">
             <h2 className="text-3xl font-bold text-center">Sign Up</h2>
             {error.general && <div className="alert alert-error">{error.general}</div>}
