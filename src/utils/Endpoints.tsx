@@ -10,4 +10,7 @@ export const Endpoints = {
   login: `${BASE_URL}/user/login`,
   signup: `${BASE_URL}/user/signup`,
   check: `${BASE_URL}/user/check`,
+  getUserProfile: `${BASE_URL}/profile/get?`,
+  getProfilePosts: `${BASE_URL}/profile/posts?`,
+  editProfile: `${BASE_URL}/profile/edit`,
 };

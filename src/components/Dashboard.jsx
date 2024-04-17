@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Card, Button, Alert } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
-import customFetch from '../utils/customFetch';
+import {customFetch} from '../utils/customFetch';
 import {Endpoints} from '../utils/Endpoints';
 
 export default function Dashboard() {

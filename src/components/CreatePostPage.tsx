@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from 'react';
 import { useAuth } from "../contexts/AuthContext";
-import customFetch from '../utils/customFetch.js'
+import  {customFetch} from '../utils/customFetch.js'
 import { useNavigate } from "react-router-dom";
 import { IImage } from '../interfaces';
 import { Endpoints } from '../utils/Endpoints';

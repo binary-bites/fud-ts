@@ -1,5 +1,5 @@
 // Return a function from the hook that can be used to perform the fetch operation.
-export default async function customFetch(url, method, body, token) {
+export async function customFetch(url, method, body, token) {
   // Define headers
   const headers = new Headers({
     'Authorization': `Bearer ${token}`,

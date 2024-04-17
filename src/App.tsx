@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 import Signup from "./components/Signup";
 import Dashboard from "./components/Dashboard";
 import Login from "./components/Login";
+import Profile from "./components/ProfilePage"
 import PrivateRoute from "./components/PrivateRoute";
 import ForgotPassword from "./components/ForgotPassword";
 import { AuthProvider } from "./contexts/AuthContext";
@@ -23,6 +24,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/create" element={<PrivateRoute><CreatePostPage/></PrivateRoute>} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/profile" element={<PrivateRoute><Profile/></PrivateRoute>} />
           </Routes>
           </AuthProvider>
         </Router>
