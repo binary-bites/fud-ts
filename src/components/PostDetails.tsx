@@ -58,15 +58,15 @@ const PostDetails: React.FC<PostDetailsProps> = ({ post, onClose }) => {
   return (
     <div>
       <dialog id={_id} className="modal modal-open">
-        <div className="modal-box w-full max-w-4xl"
+        <div className="modal-box w-auto max-w-6xl my-4 mx-auto overflow-hidden"
           onClick={(e) => e.stopPropagation()}
         >
-          <div className="flex">
-            <div className="flex-none w-60 relative">
+          <div className="flex flex-col sm:flex-row">
+            <div className="flex-none w-full sm:w-80 md:w-100 relative">
               <img
                 src={images[0]}
                 alt={title}
-                className="absolute inset-0 w-full h-full object-cover rounded-lg"
+                className="absolute top-0 left-0 w-full h-full object-contain rounded-lg"
               />
             </div>
             <div className="flex-auto p-6">
