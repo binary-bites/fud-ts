@@ -17,13 +17,13 @@ interface InputProps {
 }
 export const InputBox: React.FC<InputProps> = ({ extraClasses, label, name, placeholder, value, onChange }) => {
   return (
-    <label className={`w-full ${extraClasses}`}>
+    <label className="w-full">
       {label &&
         <div className="label">
           <span className="label-text">{label}:</span>
         </div>
       }
-      <input type="text" name={name} value={value} onChange={onChange} placeholder={placeholder} className="input input-bordered w-full" />
+      <input type="text" name={name} value={value} onChange={onChange} placeholder={placeholder} className={`input input-bordered w-full ${extraClasses}`} />
     </label>
   );
 }

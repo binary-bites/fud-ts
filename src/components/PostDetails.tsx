@@ -15,9 +15,9 @@ interface PostDetailsProps {
 const PostDetails: React.FC<PostDetailsProps> = ({ post, onClose }) => {
   const { images, title, content, ratings, comments, _id } = post;
   const { currentUser } = useAuth();
-    // Use useState to hold the posts fetched from the API
+  // Use useState to hold the posts fetched from the API
   const [currComments, setCurrComments] = useState<IComment[]>(comments);
-  const [newComment, setNewComment] = useState<string>(""); 
+  const [newComment, setNewComment] = useState<string>("");
 
   async function handleCreateComment() {
     try {
@@ -46,13 +46,13 @@ const PostDetails: React.FC<PostDetailsProps> = ({ post, onClose }) => {
       const response = await customGet(url, token);
       if (!response.ok) throw new Error("Failed to get comments");
       const postDetails = await response.json();
-      console.log("fetched post details", postDetails )
+      console.log("fetched post details", postDetails)
       await setCurrComments(postDetails.comments);
     } catch (error) {
       console.error(error);
     }
   }
-  
+
 
   return (
     <div>
@@ -133,16 +133,17 @@ const PostDetails: React.FC<PostDetailsProps> = ({ post, onClose }) => {
                   ))}
                 </div>
               </div>
-              <form className="flex items-center space-x-3">
-              <InputBox
-                name="comment-box"
+              <form className="join w-full">
+                <InputBox
+                  extraClasses="join-item"
+                  name="comment-box"
                   placeholder="Add a comment…"
                   value={newComment}
                   onChange={(e) => setNewComment(e.target.value)}
                 />
                 <button
                   type="submit"
-                  className="btn btn-primary"
+                  className="btn btn-primary join-item"
                   onClick={(e) => {
                     e.preventDefault();
                     handleCreateComment();
