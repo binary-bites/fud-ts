@@ -6,6 +6,7 @@ import { customGet, customFetch } from '../utils/customFetch';
 import { Endpoints } from '../utils/Endpoints';
 import { StarRating } from "./StarRating"
 import { InputBox } from "./FormElements";
+import { Link } from "react-router-dom"
 
 interface PostDetailsProps {
   post: IPost;
@@ -120,41 +121,56 @@ const PostDetails: React.FC<PostDetailsProps> = ({ post, onClose }) => {
                 </div>
               </div>
 
-              {/* Comments Section */}
-              <div className="mb-4">
-                <h2 className="text-lg font-semibold">Comments</h2>
-                <div className="space-y-2">
-                  {currComments.map((comment) => (
-                    <div key={comment._id} className="">
-                      <p className="text-sm font-medium">{comment.content}</p>
-                      <p className="text-xs text-gray-600">
-                        By {comment.user.firstName} {comment.user.lastName} - {new Date(comment.date).toLocaleDateString()}
-                      </p>
+              {/* Comments Section - only render if logged in*/}
+              {currentUser &&
+                <div>
+                  <div className="mb-4">
+                    <h2 className="text-lg font-semibold">Comments</h2>
+                    <div className="space-y-2">
+                      {currComments.map((comment) => (
+                        <div key={comment._id} className="">
+                          <p className="text-sm font-medium">{comment.content}</p>
+                          <p className="text-xs text-gray-600">
+                            By {comment.user.firstName} {comment.user.lastName} - {new Date(comment.date).toLocaleDateString()}
+                          </p>
+                        </div>
+                      ))}
                     </div>
-                  ))}
-                </div>
-              </div>
+                  </div>
 
-              {/* comment box */}
-              <form className="join w-full">
-                <InputBox
-                  extraClasses="join-item"
-                  name="comment-box"
-                  placeholder="Add a comment…"
-                  value={newComment}
-                  onChange={(e) => setNewComment(e.target.value)}
-                />
-                <button
-                  type="submit"
-                  className="btn btn-primary join-item"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleCreateComment();
-                  }}
-                >
-                  Post
-                </button>
-              </form>
+                  {/* comment box */}
+                  <form className="join w-full">
+                    <InputBox
+                      extraClasses="join-item"
+                      name="comment-box"
+                      placeholder="Add a comment…"
+                      value={newComment}
+                      onChange={(e) => setNewComment(e.target.value)}
+                    />
+                    <button
+                      type="submit"
+                      className="btn btn-primary join-item"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleCreateComment();
+                      }}
+                    >
+                      Post
+                    </button>
+                  </form>
+                </div>
+              }
+              {/* logged out indicator */}
+              {!currentUser &&
+                <div role="alert" className="alert">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="stroke-info shrink-0 w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                  <span>You must log in to see comments.</span>
+                  <div>
+                    <Link to="/login"><button className="btn btn-sm btn-primary">Log in</button></Link>
+                  </div>
+                </div>
+              }
+
             </div>
           </div>
         </div>
