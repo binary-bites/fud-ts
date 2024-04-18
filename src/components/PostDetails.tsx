@@ -88,37 +88,6 @@ const PostDetails: React.FC<PostDetailsProps> = ({ post, onClose }) => {
                 <div className="text-sm font-medium text-gray-500 mb-4">
                   {content}
                 </div>
-                {/* Example using Unicode characters for like/dislike, replace with icons as needed */}
-                <div className="flex items-center space-x-2 mb-4">
-                  <label>Rate Post: </label>
-                  <div className="rating">
-                    <input
-                      type="radio"
-                      name="postRating"
-                      className="mask mask-star-2 bg-orange-400"
-                    />
-                    <input
-                      type="radio"
-                      name="postRating"
-                      className="mask mask-star-2 bg-orange-400"
-                    />
-                    <input
-                      type="radio"
-                      name="postRating"
-                      className="mask mask-star-2 bg-orange-400"
-                    />
-                    <input
-                      type="radio"
-                      name="postRating"
-                      className="mask mask-star-2 bg-orange-400"
-                    />
-                    <input
-                      type="radio"
-                      name="postRating"
-                      className="mask mask-star-2 bg-orange-400"
-                    />
-                  </div>
-                </div>
               </div>
 
               {/* Comments Section - only render if logged in*/}
