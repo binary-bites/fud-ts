@@ -119,12 +119,13 @@ const PostDetails: React.FC<PostDetailsProps> = ({ post, onClose }) => {
                   </div>
                 </div>
               </div>
+
               {/* Comments Section */}
               <div className="mb-4">
                 <h2 className="text-lg font-semibold">Comments</h2>
                 <div className="space-y-2">
                   {currComments.map((comment) => (
-                    <div key={comment._id} className="bg-gray-100 p-3 rounded-lg">
+                    <div key={comment._id} className="">
                       <p className="text-sm font-medium">{comment.content}</p>
                       <p className="text-xs text-gray-600">
                         By {comment.user.firstName} {comment.user.lastName} - {new Date(comment.date).toLocaleDateString()}
@@ -133,6 +134,8 @@ const PostDetails: React.FC<PostDetailsProps> = ({ post, onClose }) => {
                   ))}
                 </div>
               </div>
+
+              {/* comment box */}
               <form className="join w-full">
                 <InputBox
                   extraClasses="join-item"
