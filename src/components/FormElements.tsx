@@ -8,18 +8,21 @@ import PostDetails from './PostDetails';
 import { FormLabel } from 'react-bootstrap';
 
 interface InputProps {
-  label: string;
+  extraClasses?: string;
+  label?: string;
   name: string;
   placeholder: string;
   value: string;
   onChange: (e) => void; // Function to call when changing data
 }
-export const InputBox: React.FC<InputProps> = ({ label, name, placeholder, value, onChange }) => {
+export const InputBox: React.FC<InputProps> = ({ extraClasses, label, name, placeholder, value, onChange }) => {
   return (
-    <label className="w-full mb-2">
-      <div className="label">
-        <span className="label-text">{label}:</span>
-      </div>
+    <label className={`w-full ${extraClasses}`}>
+      {label &&
+        <div className="label">
+          <span className="label-text">{label}:</span>
+        </div>
+      }
       <input type="text" name={name} value={value} onChange={onChange} placeholder={placeholder} className="input input-bordered w-full" />
     </label>
   );

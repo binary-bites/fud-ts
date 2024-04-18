@@ -5,6 +5,7 @@ import { useAuth } from "../contexts/AuthContext";
 import { customGet, customFetch } from '../utils/customFetch';
 import { Endpoints } from '../utils/Endpoints';
 import { StarRating } from "./StarRating"
+import { InputBox } from "./FormElements";
 
 interface PostDetailsProps {
   post: IPost;
@@ -132,18 +133,12 @@ const PostDetails: React.FC<PostDetailsProps> = ({ post, onClose }) => {
                   ))}
                 </div>
               </div>
-              <form className="flex items- space-x-3">
-              <input
-                  type="text"
+              <form className="flex items-center space-x-3">
+              <InputBox
+                name="comment-box"
                   placeholder="Add a comment…"
-                  className="input input-bordered w-full flex-1"
                   value={newComment}
                   onChange={(e) => setNewComment(e.target.value)}
-                  style={{
-                    borderColor: "rgba(209, 213, 219)",
-                    color: "black",
-                    backgroundColor: "white",
-                  }}
                 />
                 <button
                   type="submit"
