@@ -7,7 +7,7 @@ import { Endpoints } from '../utils/Endpoints';
 import { StarRating } from "./StarRating"
 import { InputBox } from "./FormElements";
 import { Link } from "react-router-dom"
-
+import LikeDislike from "./LikeDislike";
 interface PostDetailsProps {
   post: IPost;
   onClose: () => void; // Function to call when closing the popover
@@ -73,7 +73,7 @@ const PostDetails: React.FC<PostDetailsProps> = ({ post, onClose }) => {
               <div className="mb-4">
                 {/* title */}
                 <h1 className="text-xl font-semibold mb-2">{title}</h1>
-
+                
                 {/* poster ratings - conditionally display*/}
                 {(ratings.length > 0) &&
                   <div>
@@ -83,11 +83,13 @@ const PostDetails: React.FC<PostDetailsProps> = ({ post, onClose }) => {
                   </div>
                 }
 
-
+                
                 {/* content */}
                 <div className="text-sm font-medium text-gray-500 mb-4">
                   {content}
                 </div>
+                {/* like dislike */}
+                <LikeDislike postID={_id}></LikeDislike>
               </div>
 
               {/* Comments Section - only render if logged in*/}
