@@ -110,7 +110,7 @@ const PostDetails: React.FC<PostDetailsProps> = ({ post, onClose }) => {
                   {/* comment box */}
                   <form className="join w-full">
                     <InputBox
-                      extraClasses="join-item"
+                      extraClasses="join-item focus:outline-none"
                       name="comment-box"
                       placeholder="Add a comment…"
                       value={newComment}
