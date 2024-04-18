@@ -58,15 +58,15 @@ const PostDetails: React.FC<PostDetailsProps> = ({ post, onClose }) => {
   return (
     <div>
       <dialog id={_id} className="modal modal-open">
-        <div className="modal-box w-auto max-w-6xl my-4 mx-auto overflow-hidden"
+        <div className="modal-box w-auto max-w-6xl my-4 mx-auto"
           onClick={(e) => e.stopPropagation()}
         >
-          <div className="flex flex-col sm:flex-row">
-            <div className="flex-none w-full sm:w-80 md:w-100 relative">
+          <div className="flex flex-row">
+            <div className="flex items-center">
               <img
                 src={images[0]}
                 alt={title}
-                className="absolute top-0 left-0 w-full h-full object-contain rounded-lg"
+                className="w-full max-w-lg rounded-lg"
               />
             </div>
             <div className="flex-auto p-6">
@@ -85,17 +85,17 @@ const PostDetails: React.FC<PostDetailsProps> = ({ post, onClose }) => {
 
 
                 {/* content */}
-                <div className="text-sm font-medium text-gray-500 mb-4">
+                <div className="text-sm font-medium text-gray-500 mb-4 max-w-prose">
                   {content}
                 </div>
               </div>
 
               {/* Comments Section - only render if logged in*/}
               {currentUser &&
-                <div>
-                  <div className="mb-4">
+                <>
+                  <div className="mb-4 flex-grow overflow-hidden">
                     <h2 className="text-lg font-semibold">Comments</h2>
-                    <div className="space-y-2">
+                    <div className="flex-1 space-y-2 h-full overflow-y-auto">
                       {currComments.map((comment) => (
                         <div key={comment._id} className="">
                           <p className="text-sm font-medium">{comment.content}</p>
@@ -127,7 +127,7 @@ const PostDetails: React.FC<PostDetailsProps> = ({ post, onClose }) => {
                       Post
                     </button>
                   </form>
-                </div>
+                </>
               }
               {/* logged out indicator */}
               {!currentUser &&
