@@ -77,14 +77,14 @@ const PostDetails: React.FC<PostDetailsProps> = ({ post, onClose }) => {
 
             
                   {/* content */}
-                  <div className="text-sm font-medium text-gray-500 mb-4 max-w-prose">
+                  <div className="text-sm font-medium text-gray-500 mb-2 max-w-prose">
                     {content}
                   </div>
                 </div>
 
                      {/* poster ratings - conditionally display*/}
                      {(ratings.length > 0) &&
-                    <div>
+                    <div className="mb-2">
                       <StarRating rating={ratings[0]}></StarRating>
                       <StarRating rating={ratings[1]}></StarRating>
                       <StarRating rating={ratings[2]}></StarRating>
