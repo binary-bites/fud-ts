@@ -58,88 +58,98 @@ const PostDetails: React.FC<PostDetailsProps> = ({ post, onClose }) => {
   return (
     <div>
       <dialog id={_id} className="modal modal-open">
-        <div className="modal-box w-full max-w-4xl"
+        <div className="modal-box w-auto max-w-5xl my-4 mx-auto min-h-0"
           onClick={(e) => e.stopPropagation()}
         >
-          <div className="flex">
-            <div className="flex-none w-60 relative">
+          <div className="flex flex-row w-full h-[30em]">
+            <div className="m-auto w-1/2 h-full grid">
               <img
                 src={images[0]}
                 alt={title}
-                className="absolute inset-0 w-full h-full object-cover rounded-lg"
+                className="m-auto max-w-full max-h-full object-contain rounded-lg"
               />
             </div>
-            <div className="flex-auto p-6">
-              <div className="mb-4">
-                {/* title */}
-                <h1 className="text-xl font-semibold mb-2">{title}</h1>
+            <div className="grow flex flex-col min-w-1/2"> {/* container */}
+              <div className="grow flex flex-col min-h-0 pl-6"> {/* section */}
+                <div className="flex-none">
+                  {/* title */}
+                  <h1 className="text-xl font-semibold mb-2">{title}</h1>
 
-                {/* poster ratings - conditionally display*/}
-                {(ratings.length > 0) &&
-                  <div>
-                    <StarRating rating={ratings[0]}></StarRating>
-                    <StarRating rating={ratings[1]}></StarRating>
-                    <StarRating rating={ratings[2]}></StarRating>
+            
+                  {/* content */}
+                  <div className="text-sm font-medium text-gray-500 mb-2 max-w-prose">
+                    {content}
                   </div>
-                }
-
-
-                {/* content */}
-                <div className="text-sm font-medium text-gray-500 mb-4">
-                  {content}
                 </div>
-              </div>
 
-              {/* Comments Section - only render if logged in*/}
-              {currentUser &&
-                <div>
-                  <div className="mb-4">
-                    <h2 className="text-lg font-semibold">Comments</h2>
-                    <div className="space-y-2">
+                     {/* poster ratings - conditionally display*/}
+                     {(ratings.length > 0) &&
+                    <div className="mb-2">
+                      <StarRating rating={ratings[0]}></StarRating>
+                      <StarRating rating={ratings[1]}></StarRating>
+                      <StarRating rating={ratings[2]}></StarRating>
+                    </div>
+                  }
+
+
+                {/* Comments Section - only render if logged in*/}
+                {currentUser &&
+                  <>
+                    <h2 className="flex-none text-lg font-semibold">Comments</h2>
+                    {/* no comments */}
+                    {currComments.length == 0 &&
+                      <p className="text-sm text-neutral-content">
+                        No comments
+                      </p>
+                    }
+
+                    {/* scrollable comments */}
+                    <div className="space-y-2 overflow-y-auto my-2">
                       {currComments.map((comment) => (
                         <div key={comment._id} className="">
-                          <p className="text-sm font-medium">{comment.content}</p>
+                          <p className="text-sm font-medium max-w-md">{comment.content}</p>
                           <p className="text-xs text-gray-600">
                             By {comment.user.firstName} {comment.user.lastName} - {new Date(comment.date).toLocaleDateString()}
                           </p>
                         </div>
                       ))}
                     </div>
-                  </div>
 
-                  {/* comment box */}
-                  <form className="join w-full">
-                    <InputBox
-                      extraClasses="join-item focus:outline-none"
-                      name="comment-box"
-                      placeholder="Add a comment…"
-                      value={newComment}
-                      onChange={(e) => setNewComment(e.target.value)}
-                    />
-                    <button
-                      type="submit"
-                      className="btn btn-primary join-item"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleCreateComment();
-                      }}
-                    >
-                      Post
-                    </button>
-                  </form>
-                </div>
-              }
-              {/* logged out indicator */}
-              {!currentUser &&
-                <div role="alert" className="alert">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="stroke-info shrink-0 w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                  <span>You must log in to see comments.</span>
-                  <div>
-                    <Link to="/login"><button className="btn btn-sm btn-primary">Log in</button></Link>
-                  </div>
-                </div>
-              }
+                    {/* comment box */}
+                    <form className="flex-none join w-full">
+                      <InputBox
+                        extraClasses="join-item focus:outline-none"
+                        name="comment-box"
+                        placeholder="Add a comment…"
+                        value={newComment}
+                        onChange={(e) => setNewComment(e.target.value)}
+                      />
+                      <button
+                        type="submit"
+                        className="btn btn-primary join-item"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleCreateComment();
+                        }}
+                      >
+                        Post
+                      </button>
+                    </form>
+                  </>
+                }
 
+                {/* logged out indicator */}
+                {!currentUser &&
+                  <div role="alert" className="alert">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="stroke-info shrink-0 w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <span>You must log in to see comments.</span>
+                    <div>
+                      <Link to="/login"><button className="btn btn-sm btn-primary">Log in</button></Link>
+                    </div>
+                  </div>
+                }
+
+              </div>
             </div>
           </div>
         </div>
