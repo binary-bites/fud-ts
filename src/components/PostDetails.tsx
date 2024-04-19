@@ -58,19 +58,19 @@ const PostDetails: React.FC<PostDetailsProps> = ({ post, onClose }) => {
   return (
     <div>
       <dialog id={_id} className="modal modal-open">
-        <div className="modal-box w-auto max-w-4xl my-4 mx-auto min-h-0"
+        <div className="modal-box w-auto max-w-5xl my-4 mx-auto min-h-0"
           onClick={(e) => e.stopPropagation()}
         >
-          <div className="flex flex-row h-[32em]">
-            <div className="grow flex w-1/2 rounded-lg">
+          <div className="flex flex-row w-full h-[30em]">
+            <div className="m-auto w-1/2 h-full grid">
               <img
                 src={images[0]}
                 alt={title}
-                className="object-contain rounded-lg"
+                className="m-auto max-w-full max-h-full object-contain rounded-lg"
               />
             </div>
-            <div className="grow flex flex-col w-1/2"> {/* container */}
-              <div className="grow flex flex-col min-h-0 pl-6 justify-between"> {/* section */}
+            <div className="grow flex flex-col min-w-1/2"> {/* container */}
+              <div className="grow flex flex-col min-h-0 pl-6"> {/* section */}
                 <div className="flex-none">
                   {/* title */}
                   <h1 className="text-xl font-semibold mb-2">{title}</h1>
@@ -100,8 +100,9 @@ const PostDetails: React.FC<PostDetailsProps> = ({ post, onClose }) => {
                         No comments
                       </p>
                     }
-                    {/* scrollable content */}
-                    <div className="grow space-y-2 overflow-y-auto my-2">
+
+                    {/* scrollable comments */}
+                    <div className="space-y-2 overflow-y-auto my-2">
                       {currComments.map((comment) => (
                         <div key={comment._id} className="">
                           <p className="text-sm font-medium">{comment.content}</p>
