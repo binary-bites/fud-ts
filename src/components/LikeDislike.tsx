@@ -98,26 +98,25 @@ const LikeDislike = ({ postID }: LikeDislikeProps) => {
   };
 
   return (
-    <div className="flex gap-2.5">
-      <div className="flex flex-col items-center">
+    <div className="flex flex-row gap-1">
+      {/* like icons */}
+      <div className="flex flex-col items-center mb-2">
         <button
           onClick={handleLike}
-          className={`border-2 p-2.5 rounded-md ${likeState === LikeState.Liked ? 'border-blue-500' : 'border-gray-400'
-            }`}
+          className="btn btn-square btn-outline hover:btn-primary"
           aria-label="like"
         >
-          <ThumbsUp color={likeState === LikeState.Liked ? '#747FFF' : 'black'} size={24} />
+          <ThumbsUp />
         </button>
         <span>{numLikes}</span>
       </div>
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center mb-2">
         <button
           onClick={handleDislike}
-          className={`border-2 p-2.5 rounded-md ${likeState === LikeState.Disliked ? 'border-blue-500' : 'border-gray-400'
-            }`}
+          className="btn btn-square hover:btn-primary btn-outline"
           aria-label="dislike"
         >
-          <ThumbsDown color={likeState === LikeState.Disliked ? '#747FFF' : 'black'} size={24} />
+          <ThumbsDown />
         </button>
         <span>{numDislikes}</span>
       </div>
