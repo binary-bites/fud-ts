@@ -92,6 +92,12 @@ const PostDetails: React.FC<PostDetailsProps> = ({ post, onClose }) => {
                 {currentUser &&
                   <>
                     <h2 className="flex-none text-lg font-semibold">Comments</h2>
+                    {/* no comments */}
+                    {currComments.length == 0 &&
+                    <p className="text-sm text-neutral-content">
+                      No comments
+                    </p>
+                    }
                     {/* scrollable content */}
                     <div className="grow space-y-2 overflow-y-auto my-2">
                       {currComments.map((comment) => (
