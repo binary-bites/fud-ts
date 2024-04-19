@@ -103,20 +103,24 @@ const LikeDislike = ({ postID }: LikeDislikeProps) => {
       <div className="flex flex-col items-center mb-2">
         <button
           onClick={handleLike}
-          className="btn btn-square btn-outline hover:btn-primary"
+          className={`btn btn-square btn-outline hover:btn-primary
+${likeState === LikeState.Liked ? 'btn-active btn-primary' : ''}
+          `}
           aria-label="like"
         >
-          <ThumbsUp />
+          <ThumbsUp/>
         </button>
         <span>{numLikes}</span>
       </div>
       <div className="flex flex-col items-center mb-2">
         <button
           onClick={handleDislike}
-          className="btn btn-square hover:btn-primary btn-outline"
-          aria-label="dislike"
+          className={`btn btn-square hover:btn-primary btn-outline
+${likeState === LikeState.Disliked ? 'btn-active btn-primary' : ''}
+          `}
+            aria-label="dislike"
         >
-          <ThumbsDown />
+          <ThumbsDown/>
         </button>
         <span>{numDislikes}</span>
       </div>
