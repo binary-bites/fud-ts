@@ -58,7 +58,7 @@ const PostDetails: React.FC<PostDetailsProps> = ({ post, onClose }) => {
   return (
     <div>
       <dialog id={_id} className="modal modal-open">
-        <div className="modal-box w-auto max-w-6xl my-4 mx-auto min-h-0"
+        <div className="modal-box w-auto max-w-5xl my-4 mx-auto min-h-0"
           onClick={(e) => e.stopPropagation()}
         >
           <div className="flex flex-row w-full h-[30em]">
@@ -105,7 +105,7 @@ const PostDetails: React.FC<PostDetailsProps> = ({ post, onClose }) => {
                     <div className="space-y-2 overflow-y-auto my-2">
                       {currComments.map((comment) => (
                         <div key={comment._id} className="">
-                          <p className="text-sm font-medium">{comment.content}</p>
+                          <p className="text-sm font-medium max-w-md">{comment.content}</p>
                           <p className="text-xs text-gray-600">
                             By {comment.user.firstName} {comment.user.lastName} - {new Date(comment.date).toLocaleDateString()}
                           </p>
