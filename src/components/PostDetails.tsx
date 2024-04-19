@@ -58,7 +58,7 @@ const PostDetails: React.FC<PostDetailsProps> = ({ post, onClose }) => {
   return (
     <div>
       <dialog id={_id} className="modal modal-open">
-        <div className="modal-box w-auto max-w-5xl my-4 mx-auto min-h-0"
+        <div className="modal-box w-auto max-w-6xl my-4 mx-auto min-h-0"
           onClick={(e) => e.stopPropagation()}
         >
           <div className="flex flex-row w-full h-[30em]">
