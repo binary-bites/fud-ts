@@ -3,6 +3,7 @@ import { ThumbsUp, ThumbsDown } from 'react-feather';
 import { Endpoints } from '../utils/Endpoints';
 import { useAuth } from "../contexts/AuthContext";
 import { customGet, customFetch } from '../utils/customFetch';
+import { set } from 'mongoose';
 
 // Define the state enum
 enum LikeState {
@@ -19,6 +20,8 @@ const LikeDislike = ({ postID }: LikeDislikeProps) => {
     // Set initial state to Neither
     const [likeState, setLikeState] = useState<LikeState>(LikeState.Neither);
     const { currentUser } = useAuth();
+    const [numLikes, setNumLikes] = useState<number>(0);
+    const [numDislikes, setNumDislikes] = useState<number>(0);
 
     useEffect(() => {
         async function fetchLikes() {
@@ -37,6 +40,8 @@ const LikeDislike = ({ postID }: LikeDislikeProps) => {
                 } else {
                     setLikeState(LikeState.Neither);
                 }
+                setNumLikes(postDetails.likes.length)
+                setNumDislikes(postDetails.dislikes.length)
             } catch (error) {
                 console.error(error);
             }
@@ -61,6 +66,8 @@ const LikeDislike = ({ postID }: LikeDislikeProps) => {
             } else {
                 setLikeState(LikeState.Neither);
             }
+            setNumLikes(resJson.likes.length)
+            setNumDislikes(resJson.dislikes.length)
         } catch (error) {
             console.error(error);
         }
@@ -84,6 +91,8 @@ const LikeDislike = ({ postID }: LikeDislikeProps) => {
             } else {
                 setLikeState(LikeState.Neither);
             }
+            setNumLikes(resJson.likes.length)
+            setNumDislikes(resJson.dislikes.length)
         } catch (error) {
             console.error(error);
         }
@@ -91,20 +100,26 @@ const LikeDislike = ({ postID }: LikeDislikeProps) => {
 
     return (
         <div style={{ display: 'flex', gap: '10px' }}>
-            <button 
-                onClick={handleLike}
-                style={{ border: likeState === LikeState.Liked ? `2px solid #747FFF` : '2px solid gray', padding: '10px', borderRadius: '5px' }}
-                aria-label="like"
-            >
-                <ThumbsUp color={likeState === LikeState.Liked ? '#747FFF' : 'black'} size={24} />
-            </button>
-            <button 
-                onClick={handleDislike}
-                style={{ border: likeState === LikeState.Disliked ? `2px solid #747FFF` : '2px solid gray', padding: '10px', borderRadius: '5px' }}
-                aria-label="dislike"
-            >
-                <ThumbsDown color={likeState === LikeState.Disliked ? '#747FFF' : 'black'} size={24} />
-            </button>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <button 
+                    onClick={handleLike}
+                    style={{ border: likeState === LikeState.Liked ? `2px solid #747FFF` : '2px solid gray', padding: '10px', borderRadius: '5px' }}
+                    aria-label="like"
+                >
+                    <ThumbsUp color={likeState === LikeState.Liked ? '#747FFF' : 'black'} size={24} />
+                </button>
+                <span>{numLikes}</span>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <button 
+                    onClick={handleDislike}
+                    style={{ border: likeState === LikeState.Disliked ? `2px solid #747FFF` : '2px solid gray', padding: '10px', borderRadius: '5px' }}
+                    aria-label="dislike"
+                >
+                    <ThumbsDown color={likeState === LikeState.Disliked ? '#747FFF' : 'black'} size={24} />
+                </button>
+                <span>{numDislikes}</span>
+            </div>
         </div>
     );
 };
