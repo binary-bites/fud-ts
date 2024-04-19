@@ -75,8 +75,15 @@ const PostDetails: React.FC<PostDetailsProps> = ({ post, onClose }) => {
                   {/* title */}
                   <h1 className="text-xl font-semibold mb-2">{title}</h1>
 
-                  {/* poster ratings - conditionally display*/}
-                  {(ratings.length > 0) &&
+            
+                  {/* content */}
+                  <div className="text-sm font-medium text-gray-500 mb-4 max-w-prose">
+                    {content}
+                  </div>
+                </div>
+
+                     {/* poster ratings - conditionally display*/}
+                     {(ratings.length > 0) &&
                     <div>
                       <StarRating rating={ratings[0]}></StarRating>
                       <StarRating rating={ratings[1]}></StarRating>
@@ -84,11 +91,6 @@ const PostDetails: React.FC<PostDetailsProps> = ({ post, onClose }) => {
                     </div>
                   }
 
-                  {/* content */}
-                  <div className="text-sm font-medium text-gray-500 mb-4 max-w-prose">
-                    {content}
-                  </div>
-                </div>
 
                 {/* Comments Section - only render if logged in*/}
                 {currentUser &&
