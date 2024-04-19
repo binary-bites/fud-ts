@@ -69,8 +69,8 @@ const PostDetails: React.FC<PostDetailsProps> = ({ post, onClose }) => {
                 className="w-full max-w-lg rounded-lg"
               />
             </div>
-            <div className="flex-auto p-6">
-              <div className="mb-4">
+            <div className="grow flex flex-col justify-between px-6">
+              <div>
                 {/* title */}
                 <h1 className="text-xl font-semibold mb-2">{title}</h1>
 
@@ -92,10 +92,10 @@ const PostDetails: React.FC<PostDetailsProps> = ({ post, onClose }) => {
 
               {/* Comments Section - only render if logged in*/}
               {currentUser &&
-                <>
-                  <div className="mb-4 flex-grow overflow-hidden">
+                <div className="grow flex flex-col justify-between">
+                  <div className= "mb-4">
                     <h2 className="text-lg font-semibold">Comments</h2>
-                    <div className="flex-1 space-y-2 h-full overflow-y-auto">
+                    <div className="space-y-2 overflow-y-scroll">
                       {currComments.map((comment) => (
                         <div key={comment._id} className="">
                           <p className="text-sm font-medium">{comment.content}</p>
@@ -127,7 +127,7 @@ const PostDetails: React.FC<PostDetailsProps> = ({ post, onClose }) => {
                       Post
                     </button>
                   </form>
-                </>
+                </div>
               }
               {/* logged out indicator */}
               {!currentUser &&
