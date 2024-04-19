@@ -7,6 +7,7 @@ import { Endpoints } from '../utils/Endpoints';
 import { StarRating } from "./StarRating"
 import { InputBox } from "./FormElements";
 import { Link } from "react-router-dom"
+import LikeDislike from "./LikeDislike";
 
 interface PostDetailsProps {
   post: IPost;
@@ -90,7 +91,10 @@ const PostDetails: React.FC<PostDetailsProps> = ({ post, onClose }) => {
                       <StarRating rating={ratings[2]}></StarRating>
                     </div>
                   }
-
+                {/* Like/Dislike Section */}
+                {currentUser &&
+                  <LikeDislike postID={_id} />
+                }
 
                 {/* Comments Section - only render if logged in*/}
                 {currentUser &&
