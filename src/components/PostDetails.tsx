@@ -61,14 +61,14 @@ const PostDetails: React.FC<PostDetailsProps> = ({ post, onClose }) => {
         <div className="modal-box w-auto max-w-4xl my-4 mx-auto min-h-0"
           onClick={(e) => e.stopPropagation()}
         >
-          <div className="flex flex-row justify-between h-96">
-              <img
-                src={images[0]}
-                alt={title}
-                className="rounded-lg"
-              />
-            <div className="flex flex-col"> {/* container */}
-              <div className="grow flex flex-col min-h-0 px-6"> {/* section */}
+          <div className="flex flex-row h-96">
+            <img
+              src={images[0]}
+              alt={title}
+              className="rounded-lg"
+            />
+            <div className="grow flex flex-col"> {/* container */}
+              <div className="grow flex flex-col min-h-0 pl-6 justify-between"> {/* section */}
                 <div className="flex-none">
                   {/* title */}
                   <h1 className="text-xl font-semibold mb-2">{title}</h1>
@@ -87,39 +87,57 @@ const PostDetails: React.FC<PostDetailsProps> = ({ post, onClose }) => {
                     {content}
                   </div>
                 </div>
-                <h2 className="flex-none text-lg font-semibold">Comments</h2>
-                {/* scrollable content */}
-                <div className="grow space-y-2 overflow-y-auto my-2">
-                  {currComments.map((comment) => (
-                    <div key={comment._id} className="">
-                      <p className="text-sm font-medium">{comment.content}</p>
-                      <p className="text-xs text-gray-600">
-                        By {comment.user.firstName} {comment.user.lastName} - {new Date(comment.date).toLocaleDateString()}
-                      </p>
-                    </div>
-                  ))}
-                </div>
 
-                {/* comment box */}
-                <form className="flex-none join w-full">
-                  <InputBox
-                    extraClasses="join-item focus:outline-none"
-                    name="comment-box"
-                    placeholder="Add a comment…"
-                    value={newComment}
-                    onChange={(e) => setNewComment(e.target.value)}
-                  />
-                  <button
-                    type="submit"
-                    className="btn btn-primary join-item"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleCreateComment();
-                    }}
-                  >
-                    Post
-                  </button>
-                </form>
+                {/* Comments Section - only render if logged in*/}
+                {currentUser &&
+                  <>
+                    <h2 className="flex-none text-lg font-semibold">Comments</h2>
+                    {/* scrollable content */}
+                    <div className="grow space-y-2 overflow-y-auto my-2">
+                      {currComments.map((comment) => (
+                        <div key={comment._id} className="">
+                          <p className="text-sm font-medium">{comment.content}</p>
+                          <p className="text-xs text-gray-600">
+                            By {comment.user.firstName} {comment.user.lastName} - {new Date(comment.date).toLocaleDateString()}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* comment box */}
+                    <form className="flex-none join w-full">
+                      <InputBox
+                        extraClasses="join-item focus:outline-none"
+                        name="comment-box"
+                        placeholder="Add a comment…"
+                        value={newComment}
+                        onChange={(e) => setNewComment(e.target.value)}
+                      />
+                      <button
+                        type="submit"
+                        className="btn btn-primary join-item"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleCreateComment();
+                        }}
+                      >
+                        Post
+                      </button>
+                    </form>
+                  </>
+                }
+
+                {/* logged out indicator */}
+                {!currentUser &&
+                  <div role="alert" className="alert">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="stroke-info shrink-0 w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <span>You must log in to see comments.</span>
+                    <div>
+                      <Link to="/login"><button className="btn btn-sm btn-primary">Log in</button></Link>
+                    </div>
+                  </div>
+                }
+
               </div>
             </div>
           </div>
