@@ -51,19 +51,52 @@ export default function ExplorePage() {
   return (
     <>
       {/* test div to set up scrollable flex - https://codepen.io/stephenbunch/pen/KWBNVo*/}
-      <div className="flex flex-col bg-primary h-96"> {/* container */}
-        <div className="m-5 grow flex flex-col bg-secondary min-h-0"> {/* section */}
-          <div className="m-5 grow text-black bg-accent"> {/* content */}
-            yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda
-            yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda
-            yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda
-          </div>
-          <div className="m-5 grow text-black bg-white overflow-y-auto">
-             scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda
-             scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda scrolling yadda
+      <div className="flex flex-row bg-primary h-96">
+        <span className="grow m-5 bg-secondary w-1/2">wowzers look at all my cool text</span>
+        <div className="flex flex-col w-1/2"> {/* container */}
+          <div className="m-5 grow flex flex-col bg-secondary min-h-0"> {/* section */}
+            <div className="m-5 grow text-black bg-accent"> {/* content */}
+              yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda yadda
+            </div>
+            <div className="m-5 grow text-black bg-white overflow-y-auto">
+              <div>
+                yadda yadda
+              </div>
+              <div>
+                yadda yadda
+              </div>
+              <div>
+                yadda yadda
+              </div>
+              <div>
+                yadda yadda
+              </div>
+              <div>
+                yadda yadda
+              </div>
+              <div>
+                yadda yadda
+              </div>
+              <div>
+                yadda yadda
+              </div>
+              <div>
+                yadda yadda
+              </div>
+              <div>
+                yadda yadda
+              </div>
+              <div>
+                yadda yadda
+              </div>
+              <div>
+                yadda yadda
+              </div>
+            </div>
           </div>
         </div>
       </div>
+
       <PostCardContainer posts={posts} onClick={handlePostClick} />
       {selectedPost && <PostDetails post={selectedPost} onClose={handleClose} />}
     </>

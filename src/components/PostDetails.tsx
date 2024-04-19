@@ -58,88 +58,65 @@ const PostDetails: React.FC<PostDetailsProps> = ({ post, onClose }) => {
   return (
     <div>
       <dialog id={_id} className="modal modal-open">
-        <div className="modal-box w-auto max-w-6xl my-4 mx-auto"
+        <div className="modal-box w-auto max-w-6xl my-4 mx-auto min-h-0"
           onClick={(e) => e.stopPropagation()}
         >
-          <div className="flex flex-row">
-            <div className="flex items-center">
-              <img
-                src={images[0]}
-                alt={title}
-                className="w-full max-w-lg rounded-lg"
-              />
-            </div>
-            <div className="grow flex flex-col justify-between px-6">
-              <div>
-                {/* title */}
-                <h1 className="text-xl font-semibold mb-2">{title}</h1>
+          <div className="flex flex-row h-96">
+            <span className="grow m-5 bg-secondary w-1/2">wowzers look at all my cool text</span>
+            <div className="flex flex-col w-1/2"> {/* container */}
+              <div className="grow flex flex-col min-h-0"> {/* section */}
+                <div className="flex-none">
+                  {/* title */}
+                  <h1 className="text-xl font-semibold mb-2">{title}</h1>
 
-                {/* poster ratings - conditionally display*/}
-                {(ratings.length > 0) &&
-                  <div>
-                    <StarRating rating={ratings[0]}></StarRating>
-                    <StarRating rating={ratings[1]}></StarRating>
-                    <StarRating rating={ratings[2]}></StarRating>
-                  </div>
-                }
-
-
-                {/* content */}
-                <div className="text-sm font-medium text-gray-500 mb-4 max-w-prose">
-                  {content}
-                </div>
-              </div>
-
-              {/* Comments Section - only render if logged in*/}
-              {currentUser &&
-                <>
-                  <div className= "mb-4">
-                    <h2 className="text-lg font-semibold">Comments</h2>
-                    <div className="grow space-y-2 overflow-y-scroll">
-                      {currComments.map((comment) => (
-                        <div key={comment._id} className="">
-                          <p className="text-sm font-medium">{comment.content}</p>
-                          <p className="text-xs text-gray-600">
-                            By {comment.user.firstName} {comment.user.lastName} - {new Date(comment.date).toLocaleDateString()}
-                          </p>
-                        </div>
-                      ))}
+                  {/* poster ratings - conditionally display*/}
+                  {(ratings.length > 0) &&
+                    <div>
+                      <StarRating rating={ratings[0]}></StarRating>
+                      <StarRating rating={ratings[1]}></StarRating>
+                      <StarRating rating={ratings[2]}></StarRating>
                     </div>
-                  </div>
+                  }
 
-                  {/* comment box */}
-                  <form className="join w-full">
-                    <InputBox
-                      extraClasses="join-item focus:outline-none"
-                      name="comment-box"
-                      placeholder="Add a comment…"
-                      value={newComment}
-                      onChange={(e) => setNewComment(e.target.value)}
-                    />
-                    <button
-                      type="submit"
-                      className="btn btn-primary join-item"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleCreateComment();
-                      }}
-                    >
-                      Post
-                    </button>
-                  </form>
-                </>
-              }
-              {/* logged out indicator */}
-              {!currentUser &&
-                <div role="alert" className="alert">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="stroke-info shrink-0 w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                  <span>You must log in to see comments.</span>
-                  <div>
-                    <Link to="/login"><button className="btn btn-sm btn-primary">Log in</button></Link>
+                  {/* content */}
+                  <div className="text-sm font-medium text-gray-500 mb-4 max-w-prose">
+                    {content}
                   </div>
                 </div>
-              }
+                <h2 className="flex-none text-lg font-semibold">Comments</h2>
+                {/* scrollable content */}
+                <div className="grow space-y-2 overflow-y-auto my-2">
+                  {currComments.map((comment) => (
+                    <div key={comment._id} className="">
+                      <p className="text-sm font-medium">{comment.content}</p>
+                      <p className="text-xs text-gray-600">
+                        By {comment.user.firstName} {comment.user.lastName} - {new Date(comment.date).toLocaleDateString()}
+                      </p>
+                    </div>
+                  ))}
+                </div>
 
+                {/* comment box */}
+                <form className="flex-none join w-full">
+                  <InputBox
+                    extraClasses="join-item focus:outline-none"
+                    name="comment-box"
+                    placeholder="Add a comment…"
+                    value={newComment}
+                    onChange={(e) => setNewComment(e.target.value)}
+                  />
+                  <button
+                    type="submit"
+                    className="btn btn-primary join-item"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleCreateComment();
+                    }}
+                  >
+                    Post
+                  </button>
+                </form>
+              </div>
             </div>
           </div>
         </div>
