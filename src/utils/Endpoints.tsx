@@ -18,4 +18,6 @@ export const Endpoints = {
   editProfile: `${BASE_URL}/profile/edit`,
   createComment: `${BASE_URL}/comment/create`,
   getComments: `${BASE_URL}/comment/get?`,
+  likePost: `${BASE_URL}/post/like`,
+  dislikePost: `${BASE_URL}/post/dislike`,
 };
