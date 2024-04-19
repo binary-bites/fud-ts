@@ -61,13 +61,15 @@ const PostDetails: React.FC<PostDetailsProps> = ({ post, onClose }) => {
         <div className="modal-box w-auto max-w-4xl my-4 mx-auto min-h-0"
           onClick={(e) => e.stopPropagation()}
         >
-          <div className="flex flex-row h-96">
-            <img
-              src={images[0]}
-              alt={title}
-              className="rounded-lg"
-            />
-            <div className="grow flex flex-col"> {/* container */}
+          <div className="flex flex-row h-[32em]">
+            <div className="grow flex w-1/2 rounded-lg">
+              <img
+                src={images[0]}
+                alt={title}
+                className="object-contain rounded-lg"
+              />
+            </div>
+            <div className="grow flex flex-col w-1/2"> {/* container */}
               <div className="grow flex flex-col min-h-0 pl-6 justify-between"> {/* section */}
                 <div className="flex-none">
                   {/* title */}
@@ -94,9 +96,9 @@ const PostDetails: React.FC<PostDetailsProps> = ({ post, onClose }) => {
                     <h2 className="flex-none text-lg font-semibold">Comments</h2>
                     {/* no comments */}
                     {currComments.length == 0 &&
-                    <p className="text-sm text-neutral-content">
-                      No comments
-                    </p>
+                      <p className="text-sm text-neutral-content">
+                        No comments
+                      </p>
                     }
                     {/* scrollable content */}
                     <div className="grow space-y-2 overflow-y-auto my-2">
