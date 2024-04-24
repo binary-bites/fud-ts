@@ -1,0 +1,68 @@
+/*
+import { useState, useEffect } from 'react';
+import { useAuth } from "../contexts/AuthContext";
+import { customGet } from '../utils/customFetch';
+import { IPost } from '../interfaces';
+import { Endpoints } from '../utils/Endpoints';
+import PostCardContainer from './PostCardContainer';
+import PostDetails from './PostDetails';
+
+export default function ProfilePage() {
+    const { currentUser } = useAuth();
+    const [userProfile] = useState<any>(null); // Assuming userProfile includes username, display image, bio, etc.
+    const [posts, setPosts] = useState<IPost[]>([]);
+    const [selectedPost, setSelectedPost] = useState<IPost | null>(null);
+
+    useEffect(() => {
+        const fetchUserProfile = async () => {
+            try {
+                if (currentUser) {
+                    // Fetch user profile data
+                    // Example: const userProfileData = await customGet(Endpoints.getUserProfile(currentUser.uid), token);
+                    // setUserProfile(userProfileData);
+                    // Note: Implement Endpoint for fetching user profile data
+                }
+            } catch (error) {
+                console.error("Failed to fetch user profile:", error);
+            }
+        };
+
+        const fetchUserPosts = async () => {
+            try {
+                if (currentUser) {
+                    const token = await currentUser.getIdToken(true); // Force token refresh
+                    const result = await customGet(Endpoints.getPosts(currentUser.uid), token);
+                    if (!result.ok) {
+                        throw new Error("Failed to get user posts");
+                    }
+                    const response = await result.json();
+                    setPosts(response); // Assuming the response is an array of posts
+                }
+            } catch (error) {
+                console.error("Failed to fetch user posts:", error);
+            }
+        };
+
+        fetchUserProfile();
+        fetchUserPosts();
+    }, [currentUser]);
+
+    const handlePostClick = (post: IPost) => {
+        setSelectedPost(post);
+    };
+
+    return (
+        <>
+            {userProfile && (
+                <div className="profile-info">
+                    <img src={userProfile.displayImage} alt="Profile" className="profile-picture" />
+                    <h2>{userProfile.username}</h2>
+                    <p>{userProfile.bio}</p>
+                </div>
+            )}
+            <PostCardContainer posts={posts} onClick={handlePostClick} />
+            {selectedPost && <PostDetails post={selectedPost} onClose={() => setSelectedPost(null)} />}
+        </>
+    );
+}
+*/
